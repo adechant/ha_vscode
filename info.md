@@ -1,6 +1,6 @@
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
-[![License][license-shield]](LICENSE)
+[![License][license-shield]][license]
 
 [![hacs][hacsbadge]](hacs)
 [![Project Maintenance][maintenance-shield]][user_profile]
@@ -38,6 +38,8 @@ Platform | Description
 
 This project was generated from [@oncleben31](https://github.com/oncleben31)'s [Home Assistant Custom Component Cookiecutter](https://github.com/oncleben31/cookiecutter-homeassistant-custom-component) template.
 
+Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [blueprint][blueprint] template
+
 ***
 
 [blueprint]: https://github.com/custom-components/blueprint
@@ -52,6 +54,7 @@ This project was generated from [@oncleben31](https://github.com/oncleben31)'s [
 [exampleimg]: example.png
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
+[license]: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/blob/main/LICENSE
 [license-shield]: https://img.shields.io/github/license/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-%40oncleben31-blue.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
