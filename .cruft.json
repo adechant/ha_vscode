@@ -1,6 +1,6 @@
 {
     "template": "/Users/benoit/Dev/cookiecutter-homeassistant-custom-component",
-    "commit": "beed343cd7897cdc9d09a914ed54d7d1b56ac1dc",
+    "commit": "c256c2c9d321fe1395811f0f506630fd14d9ce37",
     "context": {
         "cookiecutter": {
             "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
