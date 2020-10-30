@@ -1,0 +1,19 @@
+{
+    "template": "/Users/benoit/Dev/cookiecutter-homeassistant-custom-component",
+    "commit": "beed343cd7897cdc9d09a914ed54d7d1b56ac1dc",
+    "context": {
+        "cookiecutter": {
+            "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
+            "project_name": "cookiecutter-homeassistant-custom-component-instance",
+            "domain_name": "cookiecutter_homeassistant_custom_component_instance",
+            "github_user": "oncleben31",
+            "version": "0.0.0",
+            "_copy_without_render": [
+                "*.yml",
+                "*.yaml"
+            ],
+            "_template": "/Users/benoit/Dev/cookiecutter-homeassistant-custom-component"
+        }
+    },
+    "directory": null
+}
