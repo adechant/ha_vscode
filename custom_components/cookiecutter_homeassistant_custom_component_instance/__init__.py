@@ -1,8 +1,8 @@
 """
-Custom integration to integrate blueprint with Home Assistant.
+Custom integration to integrate Cookiecutter Home Assistant Custom Component Instance with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/custom-components/blueprint
+https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance
 """
 import asyncio
 from datetime import timedelta
@@ -41,7 +41,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     username = entry.data.get(CONF_USERNAME)
     password = entry.data.get(CONF_PASSWORD)
 
-    coordinator = BlueprintDataUpdateCoordinator(
+    coordinator = CookiecutterHomeassistantCustomComponentInstanceDataUpdateCoordinator(
         hass, username=username, password=password
     )
     await coordinator.async_refresh()
@@ -62,7 +62,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     return True
 
 
-class BlueprintDataUpdateCoordinator(DataUpdateCoordinator):
+class CookiecutterHomeassistantCustomComponentInstanceDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching data from the API."""
 
     def __init__(self, hass, username, password):
