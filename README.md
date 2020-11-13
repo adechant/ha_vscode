@@ -84,7 +84,7 @@ README content if this was a published component:
 Platform | Description
 -- | --
 `binary_sensor` | Show something `True` or `False`.
-`sensor` | Show info from blueprint API.
+`sensor` | Show info from Cookiecutter Home Assistant Custom Component Instance API.
 `switch` | Switch something `True` or `False`.
 
 ![example][exampleimg]
@@ -131,7 +131,7 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [bl
 ***
 
 [blueprint]: https://github.com/custom-components/blueprint
-[buymecoffee]: https://www.buymeacoffee.com/ludeeus
+[buymecoffee]: https://www.buymeacoffee.com/oncleben31
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
 [commits-shield]: https://img.shields.io/github/commit-activity/y/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
 [commits]: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/commits/main

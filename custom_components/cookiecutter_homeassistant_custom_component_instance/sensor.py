@@ -1,16 +1,18 @@
-"""Sensor platform for blueprint."""
+"""Sensor platform for Cookiecutter Home Assistant Custom Component Instance."""
 from .const import DEFAULT_NAME, DOMAIN, ICON, SENSOR
-from .entity import BlueprintEntity
+from .entity import CookiecutterHomeassistantCustomComponentInstanceEntity
+
+from homeassistant.util import slugify
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
     """Setup sensor platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_devices([BlueprintSensor(coordinator, entry)])
+    async_add_devices([CookiecutterHomeassistantCustomComponentInstanceSensor(coordinator, entry)])
 
 
-class BlueprintSensor(BlueprintEntity):
-    """blueprint Sensor class."""
+class CookiecutterHomeassistantCustomComponentInstanceSensor(CookiecutterHomeassistantCustomComponentInstanceEntity):
+    """cookiecutter_homeassistant_custom_component_instance Sensor class."""
 
     @property
     def name(self):
@@ -20,7 +22,8 @@ class BlueprintSensor(BlueprintEntity):
     @property
     def state(self):
         """Return the state of the sensor."""
-        return self.coordinator.data.get("static")
+        # slugify the state to allow translation
+        return slugify(self.coordinator.data.get("static"))
 
     @property
     def icon(self):
