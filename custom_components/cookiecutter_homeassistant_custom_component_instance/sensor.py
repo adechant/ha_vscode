@@ -29,8 +29,8 @@ class CookiecutterHomeassistantCustomComponentInstanceSensor(CookiecutterHomeass
     def icon(self):
         """Return the icon of the sensor."""
         return ICON
-    
+
     @property
     def device_class(self):
-        """Retrun device_class for sensor."""
+        """Return de device class of the sensor."""
         return "cookiecutter_homeassistant_custom_component_instance__custom_device_class"
