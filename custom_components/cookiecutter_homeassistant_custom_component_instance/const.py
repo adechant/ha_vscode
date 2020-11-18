@@ -3,7 +3,7 @@
 NAME = "Cookiecutter Home Assistant Custom Component Instance"
 DOMAIN = "cookiecutter_homeassistant_custom_component_instance"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "2020.11.15"
+VERSION = "0.0.0"
 
 ISSUE_URL = "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/issues"
 

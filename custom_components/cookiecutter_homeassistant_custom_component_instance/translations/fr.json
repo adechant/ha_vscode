@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Cookiecutter Home Assistant Custom Component Instance",
-                "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/oncleben31/awesome-custom-component",
+                "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
                 "data": {
                     "username": "Identifiant",
                     "password": "Mot de Passe"
