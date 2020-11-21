@@ -1,17 +1,24 @@
 """Sensor platform for Cookiecutter Home Assistant Custom Component Instance."""
-from .const import DEFAULT_NAME, DOMAIN, ICON, SENSOR
-from .entity import CookiecutterHomeassistantCustomComponentInstanceEntity
-
 from homeassistant.util import slugify
+
+from .const import DEFAULT_NAME
+from .const import DOMAIN
+from .const import ICON
+from .const import SENSOR
+from .entity import CookiecutterHomeassistantCustomComponentInstanceEntity
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
     """Setup sensor platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_devices([CookiecutterHomeassistantCustomComponentInstanceSensor(coordinator, entry)])
+    async_add_devices(
+        [CookiecutterHomeassistantCustomComponentInstanceSensor(coordinator, entry)]
+    )
 
 
-class CookiecutterHomeassistantCustomComponentInstanceSensor(CookiecutterHomeassistantCustomComponentInstanceEntity):
+class CookiecutterHomeassistantCustomComponentInstanceSensor(
+    CookiecutterHomeassistantCustomComponentInstanceEntity
+):
     """cookiecutter_homeassistant_custom_component_instance Sensor class."""
 
     @property
@@ -33,4 +40,6 @@ class CookiecutterHomeassistantCustomComponentInstanceSensor(CookiecutterHomeass
     @property
     def device_class(self):
         """Return de device class of the sensor."""
-        return "cookiecutter_homeassistant_custom_component_instance__custom_device_class"
+        return (
+            "cookiecutter_homeassistant_custom_component_instance__custom_device_class"
+        )

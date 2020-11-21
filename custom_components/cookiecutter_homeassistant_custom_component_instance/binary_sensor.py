@@ -1,22 +1,28 @@
 """Binary sensor platform for Cookiecutter Home Assistant Custom Component Instance."""
 from homeassistant.components.binary_sensor import BinarySensorDevice
 
-from .const import (
-    BINARY_SENSOR,
-    BINARY_SENSOR_DEVICE_CLASS,
-    DEFAULT_NAME,
-    DOMAIN,
-)
+from .const import BINARY_SENSOR
+from .const import BINARY_SENSOR_DEVICE_CLASS
+from .const import DEFAULT_NAME
+from .const import DOMAIN
 from .entity import CookiecutterHomeassistantCustomComponentInstanceEntity
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
     """Setup binary_sensor platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_devices([CookiecutterHomeassistantCustomComponentInstanceBinarySensor(coordinator, entry)])
+    async_add_devices(
+        [
+            CookiecutterHomeassistantCustomComponentInstanceBinarySensor(
+                coordinator, entry
+            )
+        ]
+    )
 
 
-class CookiecutterHomeassistantCustomComponentInstanceBinarySensor(CookiecutterHomeassistantCustomComponentInstanceEntity, BinarySensorDevice):
+class CookiecutterHomeassistantCustomComponentInstanceBinarySensor(
+    CookiecutterHomeassistantCustomComponentInstanceEntity, BinarySensorDevice
+):
     """cookiecutter_homeassistant_custom_component_instance binary_sensor class."""
 
     @property

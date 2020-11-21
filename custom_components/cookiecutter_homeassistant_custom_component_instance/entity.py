@@ -1,7 +1,9 @@
 """CookiecutterHomeassistantCustomComponentInstanceEntity class"""
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, NAME, VERSION
+from .const import DOMAIN
+from .const import NAME
+from .const import VERSION
 
 
 class CookiecutterHomeassistantCustomComponentInstanceEntity(CoordinatorEntity):

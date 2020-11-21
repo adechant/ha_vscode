@@ -1,7 +1,7 @@
 {
-    "state": {
-        "cookiecutter_homeassistant_custom_component_instance__custom_device_class": {
-            "some_sample_static_text": "Eksempel tekst."
-        }
+  "state": {
+    "cookiecutter_homeassistant_custom_component_instance__custom_device_class": {
+      "some_sample_static_text": "Eksempel tekst."
     }
+  }
 }

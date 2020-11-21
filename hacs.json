@@ -1,11 +1,7 @@
 {
-    "name": "Cookiecutter Home Assistant Custom Component Instance",
-    "hacs": "0.24.0",
-    "domains": [
-        "binary_sensor",
-        "sensor",
-        "switch"
-    ],
-    "iot_class": "Cloud Polling",
-    "homeassistant": "0.115.0"
+  "name": "Cookiecutter Home Assistant Custom Component Instance",
+  "hacs": "0.24.0",
+  "domains": ["binary_sensor", "sensor", "switch"],
+  "iot_class": "Cloud Polling",
+  "homeassistant": "0.115.0"
 }

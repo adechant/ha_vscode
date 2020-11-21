@@ -4,10 +4,6 @@
   "documentation": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
   "dependencies": [],
   "config_flow": true,
-  "codeowners": [
-    "@oncleben31"
-  ],
-  "requirements": [
-    "sampleclient"
-  ]
+  "codeowners": ["@oncleben31"],
+  "requirements": ["sampleclient"]
 }

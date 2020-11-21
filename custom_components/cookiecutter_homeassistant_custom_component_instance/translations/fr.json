@@ -1,32 +1,32 @@
 {
-    "title": "Cookiecutter Home Assistant Custom Component Instance",
-    "config": {
-        "step": {
-            "user": {
-                "title": "Cookiecutter Home Assistant Custom Component Instance",
-                "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
-                "data": {
-                    "username": "Identifiant",
-                    "password": "Mot de Passe"
-                }
-            }
-        },
-        "error": {
-            "auth": "Identifiant ou mot de passe erroné."
-        },
-        "abort": {
-            "single_instance_allowed": "Une seule configuration de cette intégration est permise."
+  "title": "Cookiecutter Home Assistant Custom Component Instance",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Cookiecutter Home Assistant Custom Component Instance",
+        "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
+        "data": {
+          "username": "Identifiant",
+          "password": "Mot de Passe"
         }
+      }
     },
-    "options": {
-        "step": {
-            "user": {
-                "data": {
-                    "binary_sensor": "Capteur binaire activé",
-                    "sensor": "Capteur activé",
-                    "switch": "Interrupteur activé"
-                }
-            }
-        }
+    "error": {
+      "auth": "Identifiant ou mot de passe erroné."
+    },
+    "abort": {
+      "single_instance_allowed": "Une seule configuration de cette intégration est permise."
     }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "binary_sensor": "Capteur binaire activé",
+          "sensor": "Capteur activé",
+          "switch": "Interrupteur activé"
+        }
+      }
+    }
+  }
 }

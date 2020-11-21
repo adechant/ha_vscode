@@ -1,32 +1,32 @@
 {
-    "title": "Cookiecutter Home Assistant Custom Component Instance",
-    "config": {
-        "step": {
-            "user": {
-                "title": "Cookiecutter Home Assistant Custom Component Instance",
-                "description": "If you need help with the configuration have a look here: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
-                "data": {
-                    "username": "Username",
-                    "password": "Password"
-                }
-            }
-        },
-        "error": {
-            "auth": "Username/Password is wrong."
-        },
-        "abort": {
-            "single_instance_allowed": "Only a single configuration of this integration is allowed."
+  "title": "Cookiecutter Home Assistant Custom Component Instance",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Cookiecutter Home Assistant Custom Component Instance",
+        "description": "If you need help with the configuration have a look here: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
+        "data": {
+          "username": "Username",
+          "password": "Password"
         }
+      }
     },
-    "options": {
-        "step": {
-            "user": {
-                "data": {
-                    "binary_sensor": "Binary sensor enabled",
-                    "sensor": "Sensor enabled",
-                    "switch": "Switch enabled"
-                }
-            }
-        }
+    "error": {
+      "auth": "Username/Password is wrong."
+    },
+    "abort": {
+      "single_instance_allowed": "Only a single configuration of this integration is allowed."
     }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "binary_sensor": "Binary sensor enabled",
+          "sensor": "Sensor enabled",
+          "switch": "Switch enabled"
+        }
+      }
+    }
+  }
 }

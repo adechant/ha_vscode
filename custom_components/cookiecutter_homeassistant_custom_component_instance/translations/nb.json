@@ -1,32 +1,32 @@
 {
-    "title": "Cookiecutter Home Assistant Custom Component Instance",
-    "config": {
-        "step": {
-            "user": {
-                "title": "Cookiecutter Home Assistant Custom Component Instance",
-                "description": "Hvis du trenger hjep til konfigurasjon ta en titt her: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
-                "data": {
-                    "username": "Brukernavn",
-                    "password": "Passord"
-                }
-            }
-        },
-        "error": {
-            "auth": "Brukernavn/Passord er feil."
-        },
-        "abort": {
-            "single_instance_allowed": "Du kan bare konfigurere denne integrasjonen en gang."
+  "title": "Cookiecutter Home Assistant Custom Component Instance",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Cookiecutter Home Assistant Custom Component Instance",
+        "description": "Hvis du trenger hjep til konfigurasjon ta en titt her: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
+        "data": {
+          "username": "Brukernavn",
+          "password": "Passord"
         }
+      }
     },
-    "options": {
-        "step": {
-            "user": {
-                "data": {
-                    "binary_sensor": "Binær sensor aktivert",
-                    "sensor": "Sensor aktivert",
-                    "switch": "Bryter aktivert"
-                }
-            }
-        }
+    "error": {
+      "auth": "Brukernavn/Passord er feil."
+    },
+    "abort": {
+      "single_instance_allowed": "Du kan bare konfigurere denne integrasjonen en gang."
     }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "binary_sensor": "Binær sensor aktivert",
+          "sensor": "Sensor aktivert",
+          "switch": "Bryter aktivert"
+        }
+      }
+    }
+  }
 }
