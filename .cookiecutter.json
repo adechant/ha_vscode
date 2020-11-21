@@ -1,13 +1,13 @@
 {
-    "_copy_without_render": [
-        ".github/workflows/*.yml",
-        ".github/workflows/*.yaml"
-    ],
-    "_template": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component",
-    "class_name_prefix": "CookiecutterHomeassistantCustomComponentInstance",
-    "domain_name": "cookiecutter_homeassistant_custom_component_instance",
-    "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
-    "github_user": "oncleben31",
-    "project_name": "cookiecutter-homeassistant-custom-component-instance",
-    "version": "0.0.0"
+  "_copy_without_render": [
+    ".github/workflows/*.yml",
+    ".github/workflows/*.yaml"
+  ],
+  "_template": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component",
+  "class_name_prefix": "CookiecutterHomeassistantCustomComponentInstance",
+  "domain_name": "cookiecutter_homeassistant_custom_component_instance",
+  "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
+  "github_user": "oncleben31",
+  "project_name": "cookiecutter-homeassistant-custom-component-instance",
+  "version": "0.0.0"
 }
