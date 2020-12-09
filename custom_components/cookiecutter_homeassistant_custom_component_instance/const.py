@@ -5,6 +5,7 @@ DOMAIN = "cookiecutter_homeassistant_custom_component_instance"
 DOMAIN_DATA = f"{DOMAIN}_data"
 VERSION = "0.0.0"
 
+ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"
 ISSUE_URL = "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/issues"
 
 # Icons

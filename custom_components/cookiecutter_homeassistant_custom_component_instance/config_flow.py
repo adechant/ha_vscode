@@ -2,8 +2,9 @@
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
-from sampleclient.client import Client
+from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
+from .api import CookiecutterHomeassistantCustomComponentInstanceApiClient
 from .const import CONF_PASSWORD
 from .const import CONF_USERNAME
 from .const import DOMAIN
@@ -22,9 +23,7 @@ class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
         """Initialize."""
         self._errors = {}
 
-    async def async_step_user(
-        self, user_input=None  # pylint: disable=bad-continuation
-    ):
+    async def async_step_user(self, user_input=None):
         """Handle a flow initialized by the user."""
         self._errors = {}
 
@@ -67,7 +66,10 @@ class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
     async def _test_credentials(self, username, password):
         """Return true if credentials is valid."""
         try:
-            client = Client(username, password)
+            session = async_create_clientsession(self.hass)
+            client = CookiecutterHomeassistantCustomComponentInstanceApiClient(
+                username, password, session
+            )
             await client.async_get_data()
             return True
         except Exception:  # pylint: disable=broad-except
@@ -78,7 +80,7 @@ class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
 class CookiecutterHomeassistantCustomComponentInstanceOptionsFlowHandler(
     config_entries.OptionsFlow
 ):
-    """cookiecutter_homeassistant_custom_component_instance config flow options handler."""
+    """Config flow options handler for cookiecutter_homeassistant_custom_component_instance."""
 
     def __init__(self, config_entry):
         """Initialize HACS options flow."""
