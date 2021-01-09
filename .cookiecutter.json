@@ -3,7 +3,7 @@
     ".github/workflows/*.yml",
     ".github/workflows/*.yaml"
   ],
-  "_template": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component",
+  "_template": "./cookiecutter-homeassistant-custom-component",
   "class_name_prefix": "CookiecutterHomeassistantCustomComponentInstance",
   "domain_name": "cookiecutter_homeassistant_custom_component_instance",
   "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
