@@ -1,6 +1,7 @@
 """Global fixtures for Cookiecutter Home Assistant Custom Component Instance integration."""
+from unittest.mock import patch
+
 import pytest
-from pytest_homeassistant_custom_component.async_mock import patch
 
 pytest_plugins = "pytest_homeassistant_custom_component"
 

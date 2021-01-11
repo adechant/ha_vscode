@@ -1,4 +1,7 @@
 """Test Cookiecutter Home Assistant Custom Component Instance switch."""
+from unittest.mock import call
+from unittest.mock import patch
+
 from custom_components.cookiecutter_homeassistant_custom_component_instance import (
     async_setup_entry,
 )
@@ -14,8 +17,6 @@ from custom_components.cookiecutter_homeassistant_custom_component_instance.cons
 from homeassistant.components.switch import SERVICE_TURN_OFF
 from homeassistant.components.switch import SERVICE_TURN_ON
 from homeassistant.const import ATTR_ENTITY_ID
-from pytest_homeassistant_custom_component.async_mock import call
-from pytest_homeassistant_custom_component.async_mock import patch
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from .const import MOCK_CONFIG
