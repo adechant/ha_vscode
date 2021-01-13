@@ -1,4 +1,7 @@
 """Test Cookiecutter Home Assistant Custom Component Instance config flow."""
+from unittest.mock import patch
+
+import pytest
 from custom_components.cookiecutter_homeassistant_custom_component_instance.const import (
     BINARY_SENSOR,
 )
@@ -21,10 +24,23 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 from .const import MOCK_CONFIG
 
 
+@pytest.fixture(autouse=True)
+def bypass_setup_fixture():
+    """Prevent setup."""
+    with patch(
+        "custom_components.cookiecutter_homeassistant_custom_component_instance.async_setup",
+        return_value=True,
+    ), patch(
+        "custom_components.cookiecutter_homeassistant_custom_component_instance.async_setup_entry",
+        return_value=True,
+    ):
+        yield
+
+
 # Here we simiulate a successful config flow from the backend.
 # Note that we use the `bypass_get_data` fixture here because
 # we want the config flow validation to succeed during the test.
-async def test_successful_config_flow(hass, bypass_get_data):
+async def test_successful_config_flow(hass, bypass_get_data, bypass_setup_fixture):
     """Test a successful config flow."""
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
