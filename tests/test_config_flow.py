@@ -2,16 +2,24 @@
 from unittest.mock import patch
 
 import pytest
-from homeassistant import config_entries, data_entry_flow
-from pytest_homeassistant_custom_component.common import MockConfigEntry
-
-from custom_components.cookiecutter_homeassistant_custom_component_instance.const import (
+from custom_components.cc_ha_cci.const import (
     BINARY_SENSOR,
+)
+from custom_components.cc_ha_cci.const import (
     DOMAIN,
+)
+from custom_components.cc_ha_cci.const import (
     PLATFORMS,
+)
+from custom_components.cc_ha_cci.const import (
     SENSOR,
+)
+from custom_components.cc_ha_cci.const import (
     SWITCH,
 )
+from homeassistant import config_entries
+from homeassistant import data_entry_flow
+from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from .const import MOCK_CONFIG
 
@@ -22,11 +30,8 @@ from .const import MOCK_CONFIG
 @pytest.fixture(autouse=True)
 def bypass_setup_fixture():
     """Prevent setup."""
-    with patch(
-        "custom_components.cookiecutter_homeassistant_custom_component_instance.async_setup",
-        return_value=True,
-    ), patch(
-        "custom_components.cookiecutter_homeassistant_custom_component_instance.async_setup_entry",
+    with patch("custom_components.cc_ha_cci.async_setup", return_value=True,), patch(
+        "custom_components.cc_ha_cci.async_setup_entry",
         return_value=True,
     ):
         yield

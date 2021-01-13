@@ -1,5 +1,5 @@
 {
-  "domain": "cookiecutter_homeassistant_custom_component_instance",
+  "domain": "cc_ha_cci",
   "name": "Cookiecutter Home Assistant Custom Component Instance",
   "documentation": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
   "issue_tracker": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/issues",

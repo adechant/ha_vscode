@@ -4,8 +4,8 @@
     ".github/workflows/*.yaml"
   ],
   "_template": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component",
-  "class_name_prefix": "CookiecutterHomeassistantCustomComponentInstance",
-  "domain_name": "cookiecutter_homeassistant_custom_component_instance",
+  "class_name_prefix": "CcHaCci",
+  "domain_name": "cc_ha_cci",
   "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
   "github_user": "oncleben31",
   "project_name": "cookiecutter-homeassistant-custom-component-instance",

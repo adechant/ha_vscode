@@ -16,7 +16,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.helpers.update_coordinator import UpdateFailed
 
-from .api import CookiecutterHomeassistantCustomComponentInstanceApiClient
+from .api import CcHaCciApiClient
 from .const import CONF_PASSWORD
 from .const import CONF_USERNAME
 from .const import DOMAIN
@@ -43,13 +43,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     password = entry.data.get(CONF_PASSWORD)
 
     session = async_get_clientsession(hass)
-    client = CookiecutterHomeassistantCustomComponentInstanceApiClient(
-        username, password, session
-    )
+    client = CcHaCciApiClient(username, password, session)
 
-    coordinator = CookiecutterHomeassistantCustomComponentInstanceDataUpdateCoordinator(
-        hass, client=client
-    )
+    coordinator = CcHaCciDataUpdateCoordinator(hass, client=client)
     await coordinator.async_refresh()
 
     if not coordinator.last_update_success:
@@ -68,15 +64,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     return True
 
 
-class CookiecutterHomeassistantCustomComponentInstanceDataUpdateCoordinator(
-    DataUpdateCoordinator
-):
+class CcHaCciDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching data from the API."""
 
     def __init__(
         self,
         hass: HomeAssistant,
-        client: CookiecutterHomeassistantCustomComponentInstanceApiClient,
+        client: CcHaCciApiClient,
     ) -> None:
         """Initialize."""
         self.api = client

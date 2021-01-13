@@ -5,25 +5,17 @@ from .const import DEFAULT_NAME
 from .const import DOMAIN
 from .const import ICON
 from .const import SWITCH
-from .entity import CookiecutterHomeassistantCustomComponentInstanceEntity
+from .entity import CcHaCciEntity
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
     """Setup sensor platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_devices(
-        [
-            CookiecutterHomeassistantCustomComponentInstanceBinarySwitch(
-                coordinator, entry
-            )
-        ]
-    )
+    async_add_devices([CcHaCciBinarySwitch(coordinator, entry)])
 
 
-class CookiecutterHomeassistantCustomComponentInstanceBinarySwitch(
-    CookiecutterHomeassistantCustomComponentInstanceEntity, SwitchEntity
-):
-    """cookiecutter_homeassistant_custom_component_instance switch class."""
+class CcHaCciBinarySwitch(CcHaCciEntity, SwitchEntity):
+    """cc_ha_cci switch class."""
 
     async def async_turn_on(self, **kwargs):  # pylint: disable=unused-argument
         """Turn on the switch."""

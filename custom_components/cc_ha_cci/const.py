@@ -1,7 +1,7 @@
 """Constants for Cookiecutter Home Assistant Custom Component Instance."""
 # Base component constants
 NAME = "Cookiecutter Home Assistant Custom Component Instance"
-DOMAIN = "cookiecutter_homeassistant_custom_component_instance"
+DOMAIN = "cc_ha_cci"
 DOMAIN_DATA = f"{DOMAIN}_data"
 VERSION = "0.0.0"
 

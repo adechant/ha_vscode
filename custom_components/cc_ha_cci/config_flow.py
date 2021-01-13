@@ -4,17 +4,15 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
-from .api import CookiecutterHomeassistantCustomComponentInstanceApiClient
+from .api import CcHaCciApiClient
 from .const import CONF_PASSWORD
 from .const import CONF_USERNAME
 from .const import DOMAIN
 from .const import PLATFORMS
 
 
-class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
-    config_entries.ConfigFlow, domain=DOMAIN
-):
-    """Config flow for cookiecutter_homeassistant_custom_component_instance."""
+class CcHaCciFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for cc_ha_cci."""
 
     VERSION = 1
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
@@ -49,9 +47,7 @@ class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        return CookiecutterHomeassistantCustomComponentInstanceOptionsFlowHandler(
-            config_entry
-        )
+        return CcHaCciOptionsFlowHandler(config_entry)
 
     async def _show_config_form(self, user_input):  # pylint: disable=unused-argument
         """Show the configuration form to edit location data."""
@@ -67,9 +63,7 @@ class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
         """Return true if credentials is valid."""
         try:
             session = async_create_clientsession(self.hass)
-            client = CookiecutterHomeassistantCustomComponentInstanceApiClient(
-                username, password, session
-            )
+            client = CcHaCciApiClient(username, password, session)
             await client.async_get_data()
             return True
         except Exception:  # pylint: disable=broad-except
@@ -77,10 +71,8 @@ class CookiecutterHomeassistantCustomComponentInstanceFlowHandler(
         return False
 
 
-class CookiecutterHomeassistantCustomComponentInstanceOptionsFlowHandler(
-    config_entries.OptionsFlow
-):
-    """Config flow options handler for cookiecutter_homeassistant_custom_component_instance."""
+class CcHaCciOptionsFlowHandler(config_entries.OptionsFlow):
+    """Config flow options handler for cc_ha_cci."""
 
     def __init__(self, config_entry):
         """Initialize HACS options flow."""
