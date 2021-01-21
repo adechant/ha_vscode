@@ -9,5 +9,6 @@
   "friendly_name": "Cookiecutter Home Assistant Custom Component Instance",
   "github_user": "oncleben31",
   "project_name": "cookiecutter-homeassistant-custom-component-instance",
+  "test_suite": "yes",
   "version": "0.0.0"
 }
