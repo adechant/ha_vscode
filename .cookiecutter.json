@@ -1,8 +1,4 @@
 {
-  "_copy_without_render": [
-    ".github/workflows/*.yml",
-    ".github/workflows/*.yaml"
-  ],
   "_template": "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component",
   "class_name_prefix": "CcHaCci",
   "domain_name": "cc_ha_cci",
