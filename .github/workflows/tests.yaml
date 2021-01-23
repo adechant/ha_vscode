@@ -61,8 +61,6 @@ jobs:
 
       - name: Hassfest validation
         uses: "home-assistant/actions/hassfest@master"
-
-
   tests:
     runs-on: "ubuntu-latest"
     name: Run tests
@@ -83,4 +81,3 @@ jobs:
             -n auto \
             -p no:sugar \
             tests
-
