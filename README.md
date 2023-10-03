@@ -69,7 +69,7 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [integration_blueprint]: https://github.com/custom-components/integration_blueprint
 [black]: https://github.com/psf/black
 [black-shield]: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
-[buymecoffee]: https://www.buymeacoffee.com/oncleben31
+[buymecoffee]: https://www.buymeacoffee.com/adechant
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
 [commits-shield]: https://img.shields.io/github/commit-activity/y/adechant/ha_vscode.svg?style=for-the-badge
 [commits]: https://github.com/adechant/ha_vscode/commits/main
@@ -81,7 +81,7 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [license-shield]: https://img.shields.io/github/license/adechant/ha_vscode.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/maintainer-%40oncleben31-blue.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/badge/maintainer-%40adechant-blue.svg?style=for-the-badge
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [pre-commit-shield]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/adechant/ha_sscode.svg?style=for-the-badge
