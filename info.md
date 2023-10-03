@@ -40,8 +40,8 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [integration_blueprint]: https://github.com/custom-components/integration_blueprint
 [buymecoffee]: https://www.buymeacoffee.com/adechant
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
-[commits]: https://github.com/oncleben31/ha_vscode/commits/main
+[commits-shield]: https://img.shields.io/github/commit-activity/y/adechant/ha_vscode.svg?style=for-the-badge
+[commits]: https://github.com/adechant/ha_vscode/commits/main
 [hacs]: https://hacs.xyz
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [discord]: https://discord.gg/Qa5fW2R
@@ -50,8 +50,8 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [license]: https://github.com/adechant/ha_vscode/blob/main/LICENSE
-[license-shield]: https://img.shields.io/github/license/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/maintainer-%40oncleben31-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/adechant/ha_vscode.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/badge/maintainer-%40adechant-blue.svg?style=for-the-badge
+[releases-shield]: https://img.shields.io/github/release/adechant/ha_vscode.svg?style=for-the-badge
 [releases]: https://github.com/adechant/ha_vscode/releases
 [user_profile]: https://github.com/adechant

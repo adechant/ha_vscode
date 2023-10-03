@@ -91,6 +91,6 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [maintenance-shield]: https://img.shields.io/badge/maintainer-%40oncleben31-blue.svg?style=for-the-badge
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [pre-commit-shield]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
-[releases]: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/releases
+[releases-shield]: https://img.shields.io/github/release/adechant/ha_sscode.svg?style=for-the-badge
+[releases]: https://github.com/adechant/ha_vscode/releases
 [user_profile]: https://github.com/oncleben31
