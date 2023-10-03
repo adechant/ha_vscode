@@ -1,4 +1,4 @@
-# Home Assistant VS Code via Tunnels
+# VSCode Home Assistant Tunnel
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
@@ -19,11 +19,9 @@ please look at the [User Guide in the Cookiecutter documentation](https://cookie
 
 **This component will set up the following platforms.**
 
-| Platform        | Description                                                               |
-| --------------- | ------------------------------------------------------------------------- |
-| `binary_sensor` | Show something `True` or `False`.                                         |
-| `sensor`        | Show info from Cookiecutter Home Assistant Custom Component Instance API. |
-| `switch`        | Switch something `True` or `False`.                                       |
+| Platform        | Description                                  |
+| --------------- | -------------------------------------------- |
+| `service`       | VSCode tunnel in your HA Docker container.   |
 
 ![example][exampleimg]
 
@@ -35,7 +33,7 @@ please look at the [User Guide in the Cookiecutter documentation](https://cookie
 4. Download _all_ the files from the `custom_components/cc_ha_cci/` directory (folder) in this repository.
 5. Place the files you downloaded in the new directory (folder) you created.
 6. Restart Home Assistant
-7. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Cookiecutter Home Assistant Custom Component Instance"
+7. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Home Assistant"
 
 Using your HA configuration directory (folder) as a starting point you should now also have this:
 
@@ -78,8 +76,8 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [black-shield]: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
 [buymecoffee]: https://www.buymeacoffee.com/oncleben31
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
-[commits]: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/commits/main
+[commits-shield]: https://img.shields.io/github/commit-activity/y/adechant/ha_vscode.svg?style=for-the-badge
+[commits]: https://github.com/adechant/ha_vscode/commits/main
 [hacs]: https://hacs.xyz
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [discord]: https://discord.gg/Qa5fW2R
@@ -87,7 +85,7 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [exampleimg]: example.png
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
-[license-shield]: https://img.shields.io/github/license/oncleben31/cookiecutter-homeassistant-custom-component-instance.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/adechant/ha_vscode.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-%40oncleben31-blue.svg?style=for-the-badge
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [pre-commit-shield]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=for-the-badge
