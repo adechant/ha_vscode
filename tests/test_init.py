@@ -1,18 +1,18 @@
 """Test Cookiecutter Home Assistant Custom Component Instance setup process."""
 import pytest
-from custom_components.cc_ha_cci import (
+from custom_components.ha_vscode import (
     async_reload_entry,
 )
-from custom_components.cc_ha_cci import (
+from custom_components.ha_vscode import (
     async_setup_entry,
 )
-from custom_components.cc_ha_cci import (
+from custom_components.ha_vscode import (
     async_unload_entry,
 )
-from custom_components.cc_ha_cci import (
+from custom_components.ha_vscode import (
     CcHaCciDataUpdateCoordinator,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     DOMAIN,
 )
 from homeassistant.exceptions import ConfigEntryNotReady

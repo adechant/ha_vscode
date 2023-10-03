@@ -2,7 +2,7 @@
 import asyncio
 
 import aiohttp
-from custom_components.cc_ha_cci.api import (
+from custom_components.ha_vscode.api import (
     CcHaCciApiClient,
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession

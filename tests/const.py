@@ -1,8 +1,8 @@
 """Constants for Cookiecutter Home Assistant Custom Component Instance tests."""
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     CONF_PASSWORD,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     CONF_USERNAME,
 )
 

@@ -1,4 +1,4 @@
-# Cookiecutter Home Assistant Custom Component Instance
+# Home Assistant VS Code via Tunnels
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]

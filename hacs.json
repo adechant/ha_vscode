@@ -1,7 +1,6 @@
 {
-  "name": "Cookiecutter Home Assistant Custom Component Instance",
+  "name": "VSCode Home Assistant Tunnel",
   "hacs": "1.6.0",
-  "domains": ["binary_sensor", "sensor", "switch"],
-  "iot_class": "Cloud Polling",
+  "domains": ["service"],
   "homeassistant": "0.118.0"
 }

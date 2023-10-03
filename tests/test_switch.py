@@ -2,16 +2,16 @@
 from unittest.mock import call
 from unittest.mock import patch
 
-from custom_components.cc_ha_cci import (
+from custom_components.ha_vscode import (
     async_setup_entry,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     DEFAULT_NAME,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     DOMAIN,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     SWITCH,
 )
 from homeassistant.components.switch import SERVICE_TURN_OFF

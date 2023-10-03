@@ -11,20 +11,17 @@
 
 **This component will set up the following platforms.**
 
-| Platform        | Description                         |
-| --------------- | ----------------------------------- |
-| `binary_sensor` | Show something `True` or `False`.   |
-| `sensor`        | Show info from API.                 |
-| `switch`        | Switch something `True` or `False`. |
+| Platform        | Description                                  |
+| --------------- | -------------------------------------------- |
+| `service`       | VSCode tunnel in your HA Docker container.   |
 
-![example][exampleimg]
 
 {% if not installed %}
 
 ## Installation
 
 1. Click install.
-1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Cookiecutter Home Assistant Custom Component Instance".
+1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "VSCode Home Assistant Tunnel".
 
 {% endif %}
 

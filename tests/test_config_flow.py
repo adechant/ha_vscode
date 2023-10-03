@@ -2,19 +2,19 @@
 from unittest.mock import patch
 
 import pytest
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     BINARY_SENSOR,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     DOMAIN,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     PLATFORMS,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     SENSOR,
 )
-from custom_components.cc_ha_cci.const import (
+from custom_components.ha_vscode.const import (
     SWITCH,
 )
 from homeassistant import config_entries
