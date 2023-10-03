@@ -1,8 +1,8 @@
 """
-Custom integration to integrate Cookiecutter Home Assistant Custom Component Instance with Home Assistant.
+Custom integration to integrate VSCode Home Assistant Tunnel with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance
+https://github.com/adechant/ha_vscode
 """
 import asyncio
 import logging

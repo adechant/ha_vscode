@@ -1,18 +1,18 @@
-"""Adds config flow for Cookiecutter Home Assistant Custom Component Instance."""
+"""Adds config flow for VSCode HA Tunnel."""
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
-from .api import CcHaCciApiClient
+from .api import HAVSCodeApiClient
 from .const import CONF_PASSWORD
 from .const import CONF_USERNAME
 from .const import DOMAIN
 from .const import PLATFORMS
 
 
-class CcHaCciFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for cc_ha_cci."""
+class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for ha_vscode."""
 
     VERSION = 1
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
@@ -26,8 +26,8 @@ class CcHaCciFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         self._errors = {}
 
         # Uncomment the next 2 lines if only a single instance of the integration is allowed:
-        # if self._async_current_entries():
-        #     return self.async_abort(reason="single_instance_allowed")
+        if self._async_current_entries():
+            return self.async_abort(reason="single_instance_allowed")
 
         if user_input is not None:
             valid = await self._test_credentials(
@@ -47,7 +47,7 @@ class CcHaCciFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        return CcHaCciOptionsFlowHandler(config_entry)
+        return HAVSCodeOptionsFlowHandler(config_entry)
 
     async def _show_config_form(self, user_input):  # pylint: disable=unused-argument
         """Show the configuration form to edit location data."""
@@ -63,7 +63,7 @@ class CcHaCciFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         """Return true if credentials is valid."""
         try:
             session = async_create_clientsession(self.hass)
-            client = CcHaCciApiClient(username, password, session)
+            client = HAVSCodeApiClient(username, password, session)
             await client.async_get_data()
             return True
         except Exception:  # pylint: disable=broad-except
@@ -71,7 +71,7 @@ class CcHaCciFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         return False
 
 
-class CcHaCciOptionsFlowHandler(config_entries.OptionsFlow):
+class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
     """Config flow options handler for cc_ha_cci."""
 
     def __init__(self, config_entry):

@@ -2,8 +2,8 @@
   "config": {
     "step": {
       "user": {
-        "title": "Cookiecutter Home Assistant Custom Component Instance",
-        "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance",
+        "title": "VSCode Home Assistant Tunnel",
+        "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/adehcant/ha_vscode",
         "data": {
           "username": "Identifiant",
           "password": "Mot de Passe"
@@ -21,9 +21,7 @@
     "step": {
       "user": {
         "data": {
-          "binary_sensor": "Capteur binaire activé",
-          "sensor": "Capteur activé",
-          "switch": "Interrupteur activé"
+          "service": "Service activé"
         }
       }
     }

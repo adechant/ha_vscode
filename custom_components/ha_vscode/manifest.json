@@ -1,6 +1,7 @@
 {
   "domain": "ha_vscode",
   "name": "Home Assistant VSCode Tunnel",
+  "version": "0.0.1",
   "documentation": "https://github.com/adechant/ha_vscode",
   "issue_tracker": "https://github.com/adechant/ha_vscode/issues",
   "dependencies": [],

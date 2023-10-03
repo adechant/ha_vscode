@@ -1,12 +1,11 @@
-"""Constants for Cookiecutter Home Assistant Custom Component Instance."""
 # Base component constants
-NAME = "Cookiecutter Home Assistant Custom Component Instance"
-DOMAIN = "cc_ha_cci"
+NAME = "VSCode Home Assistant Tunnel"
+DOMAIN = "ha_vscode"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "0.0.0"
+VERSION = "0.0.1"
 
 ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"
-ISSUE_URL = "https://github.com/oncleben31/cookiecutter-homeassistant-custom-component-instance/issues"
+ISSUE_URL = "https://github.com/adechant/ha_vscode/issues"
 
 # Icons
 ICON = "mdi:format-quote-close"
@@ -15,10 +14,8 @@ ICON = "mdi:format-quote-close"
 BINARY_SENSOR_DEVICE_CLASS = "connectivity"
 
 # Platforms
-BINARY_SENSOR = "binary_sensor"
-SENSOR = "sensor"
-SWITCH = "switch"
-PLATFORMS = [BINARY_SENSOR, SENSOR, SWITCH]
+SERVICE = "service"
+PLATFORMS = [SERVICE]
 
 
 # Configuration and options
