@@ -14,8 +14,12 @@
 [![Discord][discord-shield]][discord]
 [![Community Forum][forum-shield]][forum]
 
-**TO BE REMOVED: If you need help, as a developer, to use this custom component tempalte,
-please look at the [User Guide in the Cookiecutter documentation](https://cookiecutter-homeassistant-custom-component.readthedocs.io/en/stable/quickstart.html)**
+
+## HACS Installation
+
+1. Install the custom component from HACS.
+2. Restart Home Assistant.
+3. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Home Assistant VSCode Tunnel".
 
 **This component will set up the following platforms.**
 
