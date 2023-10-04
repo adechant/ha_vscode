@@ -18,10 +18,11 @@
 
 {% if not installed %}
 
-## Installation
+## HACS Installation
 
-1. Click install.
-1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Home Assistant VSCode Tunnel".
+1. Install the custom component from HACS.
+2. Restart Home Assistant.
+3. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Home Assistant VSCode Tunnel".
 
 {% endif %}
 

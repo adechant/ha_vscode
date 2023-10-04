@@ -27,7 +27,7 @@
 | --------------- | -------------------------------------------- |
 | `service`       | VSCode tunnel in your HA Docker container.   |
 
-![example][exampleimg]
+[![example]][exampleimg]
 
 ## Manual Installation
 
