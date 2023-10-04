@@ -1,29 +1,36 @@
 {
-  "config": {
-    "step": {
-      "user": {
-        "title": "Home Assistant VSCode Tunnel",
-        "description": "If you need help with the configuration have a look here: https://github.com/adechant/ha_vscode",
-        "data": {
-          "username": "Username",
-          "password": "Password"
+    "config": {
+      "abort": {
+          "single_instance_allowed": "Only a single configuration of HACS is allowed.",
+          "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
+          "github": "Could not authenticate with GitHub, try again later.",
+          "done_debug": "End of developed code."
+      },
+      "step": {
+        "user": {
+          "title": "Home Assistant VSCode Tunnel",
+          "description": "If you need help with the configuration have a look here: https://github.com/adechant/ha_vscode . Before you can setup a VSCode Tunnel you need to acknowledge the following",
+          "data": {
+            "acc_logs": "I know how to access Home Assistant logs",
+            "acc_git": "I have an active github account - this will be required to authenticate the tunnel."
+          }
+        },
+        "device": {
+            "title": "Waiting for device activation"
         }
+      },
+      "error": {
+        "auth": "Username/Password is wrong."
       }
     },
-    "error": {
-      "auth": "Username/Password is wrong."
-    },
-    "abort": {
-      "single_instance_allowed": "Only a single instance is allowed."
-    }
-  },
-  "options": {
-    "step": {
-      "user": {
-        "data": {
-          "service": "Service enabled"
+    "options": {
+      "step": {
+        "user": {
+          "data": {
+            "service": "Service enabled"
+          }
         }
       }
     }
   }
-}
+  

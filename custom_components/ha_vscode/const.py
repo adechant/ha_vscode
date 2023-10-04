@@ -1,30 +1,16 @@
 # Base component constants
 NAME = "Home Assistant VSCode Tunnel"
 DOMAIN = "ha_vscode"
+PACKAGE_NAME = "custom_components.ha_vscode"
 DOMAIN_DATA = f"{DOMAIN}_data"
 VERSION = "0.0.1"
-
-ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"
-ISSUE_URL = "https://github.com/adechant/ha_vscode/issues"
-
-# Icons
+MINIMUM_HA_VERSION = "2023.6.0"
 ICON = "mdi:format-quote-close"
-
-# Device classes
-BINARY_SENSOR_DEVICE_CLASS = "connectivity"
-
-# Platforms
-SERVICE = "service"
-PLATFORMS = [SERVICE]
-
-
-# Configuration and options
 CONF_ENABLED = "enabled"
-
-# Defaults
 DEFAULT_NAME = DOMAIN
-
-
+HAVSCODE_SYSTEM_ID = "98450013-1865-4292-be24-abde34214bd6"
+ISSUE_URL = "https://https://github.com/adechant/ha_vscode/issues"
+PLATFORMS = ["SERVICE"]
 STARTUP_MESSAGE = f"""
 -------------------------------------------------------------------
 {NAME}
