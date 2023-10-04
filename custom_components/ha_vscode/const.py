@@ -1,5 +1,5 @@
 # Base component constants
-NAME = "VSCode Home Assistant Tunnel"
+NAME = "Home Assistant VSCode Tunnel"
 DOMAIN = "ha_vscode"
 DOMAIN_DATA = f"{DOMAIN}_data"
 VERSION = "0.0.1"

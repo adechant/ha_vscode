@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "title": "VSCode Home Assistant Tunnel",
+        "title": "Home Assistant VSCode Tunnel",
         "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/adehcant/ha_vscode",
         "data": {
           "username": "Identifiant",

@@ -1,4 +1,4 @@
-# VSCode Home Assistant Tunnel
+# Home Assistant VSCode Tunnel
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
