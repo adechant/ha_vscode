@@ -8,6 +8,7 @@
   "config_flow": true,
   "codeowners": ["@adechant"],
   "requirements": [],
-  "integration_type": "service",
-  "loggers":["custom_components.ha_vscode"]
+  "loggers":["custom_components.ha_vscode"],
+  "iot_class": "local_polling",
+  "integration": "device"
 }

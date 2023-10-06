@@ -19,22 +19,25 @@
     "step": {
       "user": {
         "title": "Home Assistant VSCode Tunnel",
-        "description": "If you need help with the configuration have a look here: https://github.com/adechant/ha_vscode.",
-        "data": {
-          "acc_git": "Do you have an active github account? This will be required to authenticate the tunnel."
-        }
+        "description": "If you need help with the configuration have a look here: https://github.com/adechant/ha_vscode.\n1. Open {url} \n2. Paste the token listed below to authorize your VSCode tunnel.\n3. Click submit to activate the tunnel. \n```\n{token}\n```\n"
       }
     },
     "progress": {
         "wait_for_oauth": "Generating OAuth token. Please wait while the tunnel is started.",
-        "wait_for_activation": "1. Open {url} \n2. Paste the following key to authorize your VSCode tunnel: \n```\n{code}\n```\n"
+        "wait_for_activation": "1. Open {url} \n2. Paste the following token to authorize your VSCode tunnel: \n```\n{token}\n```\n"
     }
   },
   "options": {
+    "abort": {
+        "not_setup": "HA VSCode Tunnel is not setup.",
+        "no_reauth_needed": "HA VSCode Tunnel is up and running!"
+    },
     "step": {
       "user": {
+        "title": "Home Assistant VSCode Tunnel",
+        "description": "Service enabled. Please access VSCode instance at {url}",
         "data": {
-          "service": "Service enabled"
+          "needs_reauth": "Click here if the service needs re-authentication."
         }
       }
     }

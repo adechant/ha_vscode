@@ -1,8 +1,8 @@
 import subprocess
 import time
+import async_timeout
 import re
 import os
-import sys
 import logging
 import os.path
 from threading import Thread, Lock
@@ -40,7 +40,7 @@ class VSCodeDeviceAPI:
         self.log.addHandler(handler)"""
         ###
 
-        self.oauthCode = None
+        self.oauthToken = None
         self.devURL = None
         self.proc = None
         self.storage_dir = storage_dir
@@ -48,6 +48,7 @@ class VSCodeDeviceAPI:
         self.lock = Lock()
         if not os.path.exists(self.storage_dir):
             os.mkdir(self.storage_dir)
+        self.exePath = os.path.join(self.storage_dir, "code")
 
     def downloadViaCurl(self, outdir):
         # curl -Lk https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64 --output /workspaces/ha_core/config/custom_components/ha_vscode/bin/vscode_cli.tar.gz
@@ -141,12 +142,14 @@ class VSCodeDeviceAPI:
             self.log("Error occurred while untarring " + outfile[:-3])
             raise HAVSCodeTarException()
 
-    def checkExe(self, exePath):
+    def checkExe(self):
         # check that the code executable exists
-        if not os.path.exists(exePath):
-            self.log.debug("Error! VSCode executable is not located at: " + exePath)
+        if not os.path.exists(self.exePath):
+            self.log.debug(
+                "Error! VSCode executable is not located at: " + self.exePath
+            )
         else:
-            self.log.debug("VSCode executable is located at: " + exePath)
+            self.log.debug("VSCode executable is located at: " + self.exePath)
 
     def reader(self):
         self.log.debug("Starting reader thread")
@@ -154,14 +157,38 @@ class VSCodeDeviceAPI:
             while True:
                 line = self.proc.stdout.readline().strip()
                 self.log.debug("Parsing line: " + line)
-                if not self.checkForOauthCode(line):
+                if not self.checkForOauthToken(line):
                     self.checkForDevURL(line)
         except:
             self.log.debug("Reader threw exception: likely closed stdout")
         finally:
             self.log.debug("Received EOF from stdout, thread exiting...")
 
-    def startTunnel(self, exePath):
+    def unregisterTunnel(self):
+        if self.proc:
+            self.log.debug(
+                "Stop tunnel with active subprocess. Stopping and unregistering..."
+            )
+            self.stopTunnel()
+
+        isUnregistered = subprocess.run(
+            [
+                self.exePath,
+                "tunnel",
+                "unregister",
+            ],
+            capture_output=True,
+            text=True,
+        )
+
+        if isUnregistered == 0:
+            self.log.info("Unregistering tunnel successful.")
+        else:
+            self.log.error(
+                "Could not unregister tunnel. Please run 'code tunnel unregister' manually to avoid future issues."
+            )
+
+    def startTunnel(self):
         # if the tunnel is already started, stop it and restart - we otherwise might miss important info written to stdout
         if self.proc:
             self.log.debug(
@@ -170,7 +197,7 @@ class VSCodeDeviceAPI:
             self.stopTunnel()
 
         self.proc = subprocess.Popen(
-            [exePath, "tunnel", "--random-name", "--accept-server-license-terms"],
+            [self.exePath, "tunnel", "--random-name", "--accept-server-license-terms"],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,  # output stderr to stdout
             # bufsize=1, #was enabled to reduce the buffer size
@@ -218,25 +245,25 @@ class VSCodeDeviceAPI:
         self.proc = None
         self.log.info("Tunnel Service ended.")
 
-    def getOAuthCode(self, timeout=3.0):
+    def getOAuthToken(self, timeout=3.0):
         out = None
         start = time.time()
         while True:
             self.lock.acquire()
-            self.log.debug("Acquired Lock - getOAuthCode")
-            if self.oauthCode:
-                out = self.oauthCode
+            self.log.debug("Acquired Lock - getOAuthToken")
+            if self.oauthToken:
+                out = self.oauthToken
                 self.lock.release()
-                self.log.debug("Released Lock - getOAuthCode")
-                self.log.debug("getOAuthCode returning: " + out)
+                self.log.debug("Released Lock - getOAuthToken")
+                self.log.debug("getOAuthToken returning: " + out)
                 break
             if (time.time() - start) > timeout:
                 self.lock.release()
-                self.log.debug("Released Lock - getOAuthCode")
-                self.log.debug("getOAuthCode returning: None")
+                self.log.debug("Released Lock - getOAuthToken")
+                self.log.debug("getOAuthToken returning: None")
                 break
             self.lock.release()
-            self.log.debug("Released Lock - getOAuthCode")
+            self.log.debug("Released Lock - getOAuthToken")
             self.log.debug("Sleeping for 0.1s")
             time.sleep(0.1)
         return out
@@ -265,22 +292,21 @@ class VSCodeDeviceAPI:
             time.sleep(0.1)
         return out
 
-    def checkForOauthCode(self, line):
+    def checkForOauthToken(self, line):
         match = re.search(
             "https://github.com/login/device and use code .*$",
             line,
         )
         if match:
-            code = match.group()[-9:]
-            self.log.info("Github oauth login code: " + code)
-            # if we parsed an oauth code, then the dev url must be stale and we need to re-auth
+            token = match.group()[-9:]
+            self.log.info("Github oauth login token: " + token)
+            # if we parsed an oauth Token, then the dev url must be stale and we need to re-auth
             self.lock.acquire()
-            self.log.debug("Acquired Lock - checkForOauthCode")
-            self.devURL = None
-            self.oauthCode = code
+            self.log.debug("Acquired Lock - checkForOauthToken")
+            self.oauthToken = token
             self.lock.release()
-            self.log.debug("Released Lock - checkForOauthCode")
-            return self.oauthCode
+            self.log.debug("Released Lock - checkForOauthToken")
+            return self.oauthToken
         return None
 
     def checkForDevURL(self, line):
@@ -291,19 +317,23 @@ class VSCodeDeviceAPI:
         if match:
             url = match.group()
             self.log.info("Dev url: " + url)
-            # if we have a dev url, we don't need an oauth code
+            # if we have a dev url, we don't need an oauth token
             # probably should make this threadsafe
             self.lock.acquire()
             self.log.debug("Acquired Lock - checkForDevURL")
             self.devURL = url
-            self.oauthCode = None
             self.lock.release()
             self.log.debug("Released Lock - checkForDevURL")
             return url
         return None
 
+    def isRunning(self):
+        return self.proc is not None
+
     def activate(self, timeout=20.0):
         result = self.getDevURL(timeout=timeout)
+        if result:
+            self.log.debug("Activated on url: " + result)
         if result is None:
             self.stopTunnel()
         return result
@@ -325,21 +355,20 @@ class VSCodeDeviceAPI:
 
         self.unzip(outdir)
         self.untar(outdir)
-        exePath = os.path.join(self.storage_dir, "code")
-        self.checkExe(exePath)
-        self.startTunnel(exePath)
-        code = self.getOAuthCode(timeout=timeout)
-        self.log.debug("Registered with code: " + code)
-        return code
+        self.checkExe()
+        self.startTunnel()
+        token = self.getOAuthToken(timeout=timeout)
+        if token:
+            self.log.debug("Registered with token: " + token)
+        return token
 
 
 def main():
     api = VSCodeDeviceAPI(".")
     outfile = "vscode_cli.tar.gz"
     outdir = os.path.join(".", outfile)
-    exePath = os.path.join(".", "code")
-    api.startTunnel(exePath)
-    api.getOAuthCode()
+    api.startTunnel()
+    api.getOAuthToken()
     api.getDevURL(timeout=3)
     api.stopTunnel()
 
