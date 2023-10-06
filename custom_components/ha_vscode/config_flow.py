@@ -6,10 +6,13 @@ from homeassistant.core import callback
 from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.event import async_call_later
 from homeassistant.loader import async_get_integration
+from homeassistant.helpers.storage import STORAGE_DIR
 import voluptuous as vol
 from .vscode_device import VSCodeDeviceAPI
+from .exceptions import *
 import logging
-from .const import DOMAIN, MINIMUM_HA_VERSION, PACKAGE_NAME
+import os.path
+from .const import *
 
 LOGGER: logging.Logger = logging.getLogger(PACKAGE_NAME)
 
@@ -29,6 +32,7 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         self._user_input = {}
         self._reauth = False
         self.log = LOGGER
+        self.path = None
 
     async def async_step_user(self, user_input):
         """Handle a flow initialized by the user."""
@@ -39,39 +43,42 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         if self.hass.data.get(DOMAIN):
             return self.async_abort(reason="single_instance_allowed")
 
-        if user_input:
+        if user_input is not None:
             if [x for x in user_input if x.startswith("acc_") and not user_input[x]]:
                 self._errors["base"] = "acc"
                 return await self._show_config_form(user_input)
 
             self._user_input = user_input
 
-            await self.async_step_device(user_input)
-            return self.async_abort(reason="done_debug")
+            return await self.async_step_device(user_input)
 
         return await self._show_config_form(user_input)
 
     async def async_step_device(self, _user_input):
         """Handle device steps"""
 
-        self.log.info(self.flow_id)
-
         async def _wait_for_activation(_=None):
             if self._login_device is None:
                 async_call_later(self.hass, 1, _wait_for_activation)
                 return
-            response = await self.device.activation()
+            response = self.device.activation()
             self.log.info(response)
             self.activation = response
-            self.log.info(self.flow_id)
+            self.hass.async_create_task(
+                self.hass.config_entries.flow.async_configure(flow_id=self.flow_id)
+            )
+
+        if not self.path:
+            self.path = os.path.join(self.hass.config.path(STORAGE_DIR), DOMAIN)
+        self.log.info("Storage located at: " + self.path)
 
         if not self.activation:
             integration = await async_get_integration(self.hass, DOMAIN)
             if not self.device:
-                self.device = VSCodeDeviceAPI()
-            async_call_later(self.hass, 1, _wait_for_activation)
+                self.device = VSCodeDeviceAPI(self.path)
+            async_call_later(self.hass, 2, _wait_for_activation)
             try:
-                response = await self.device.register()
+                response = self.device.register()
                 self._login_device = response
                 self.log.info(response)
                 return self.async_show_progress(
@@ -79,10 +86,10 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                     progress_action="wait_for_device",
                     description_placeholders={
                         "url": "PUT GITHUB URL HERE FROM ./code tunnel",
-                        "code": "PUT GITHUB OATH TOKEN HERE FROM ./code tunnel",
+                        "code": "PUT GITHUB OAUTH TOKEN HERE FROM ./code tunnel",
                     },
                 )
-            except Exception as exception:
+            except HAVSCodeAuthenticationException as exception:
                 self.log.error(exception)
                 return self.async_abort(reason="github")
 
@@ -91,6 +98,7 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_device_done(self, user_input: dict[str, bool] | None = None):
         """Handle device steps"""
 
+        return self.async_abort(reason="github")
         if self._reauth:
             existing_entry = self.hass.config_entries.async_get_entry(
                 self.context["entry_id"]
@@ -103,13 +111,8 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_abort(reason="reauth_successful")
 
         return self.async_create_entry(
-            title="",
-            data={
-                "token": self.activation.access_token,
-            },
-            options={
-                "experimental": self._user_input.get("experimental", False),
-            },
+            title="ha_vscode",
+            data={"token": "OAUTH TOKEN", "remote_url": "URL"},
         )
 
     async def _show_config_form(self, user_input):
@@ -127,9 +130,6 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema(
                 {
-                    vol.Required(
-                        "acc_logs", default=user_input.get("acc_logs", True)
-                    ): bool,
                     vol.Required(
                         "acc_git", default=user_input.get("acc_git", True)
                     ): bool,

@@ -1,4 +1,3 @@
-# Base component constants
 NAME = "Home Assistant VSCode Tunnel"
 DOMAIN = "ha_vscode"
 PACKAGE_NAME = "custom_components.ha_vscode"
@@ -11,6 +10,9 @@ DEFAULT_NAME = DOMAIN
 HAVSCODE_SYSTEM_ID = "98450013-1865-4292-be24-abde34214bd6"
 ISSUE_URL = "https://https://github.com/adechant/ha_vscode/issues"
 PLATFORMS = ["SERVICE"]
+CONF_HEADER_PATH = "header_path"
+
+
 STARTUP_MESSAGE = f"""
 -------------------------------------------------------------------
 {NAME}
