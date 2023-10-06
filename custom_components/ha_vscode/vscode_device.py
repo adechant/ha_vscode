@@ -7,7 +7,12 @@ import logging
 import os.path
 from threading import Thread, Lock
 
-# from .const import PACKAGE_NAME
+from .const import PACKAGE_NAME
+from .exceptions import (
+    HAVSCodeDownloadException,
+    HAVSCodeZipException,
+    HAVSCodeTarException,
+)
 
 if not "PACKAGE_NAME" in globals():
     PACKAGE_NAME = "ha_vscode"
@@ -26,13 +31,13 @@ class VSCodeDeviceAPI:
         self.log.setLevel(logging.DEBUG)
 
         ###uncomment if debuggin outside of home assistant
-        handler = logging.StreamHandler(sys.stdout)
+        """handler = logging.StreamHandler(sys.stdout)
         handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
         )
         handler.setFormatter(formatter)
-        self.log.addHandler(handler)
+        self.log.addHandler(handler)"""
         ###
 
         self.oauthCode = None
@@ -44,70 +49,71 @@ class VSCodeDeviceAPI:
         if not os.path.exists(self.storage_dir):
             os.mkdir(self.storage_dir)
 
-    def activation(self):
-        result = subprocess.run(
-            ["which apt-get"], shell=True, capture_output=True, text=True, check=True
-        )
-        return result.stdout
-
     def downloadViaCurl(self, outdir):
+        # curl -Lk https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64 --output /workspaces/ha_core/config/custom_components/ha_vscode/bin/vscode_cli.tar.gz
         result = None
-        getVSCodeCLIcurl = (
-            "curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64' --output "
-            + outdir
-        )
+        getVSCodeCLIcurl = [
+            "curl",
+            "-Lk",
+            "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64",
+            "--output",
+            outdir,
+        ]
 
         hasCurl = subprocess.run(
-            ["which curl"],
-            shell=True,
+            ["which", "curl"],
             capture_output=True,
             text=True,
         )
 
-        if hasCurl.stdout:
+        if hasCurl.returncode == 0:
+            self.log.debug("Curl found on the system")
             result = subprocess.run(
-                [getVSCodeCLIcurl],
-                shell=True,
+                getVSCodeCLIcurl,
                 capture_output=True,
                 text=True,
                 check=True,
             )
         else:
+            self.log.debug("Curl not found on the system")
             return None
 
-        return result.stdout
+        return result.returncode == 0
 
     def downloadViaWGet(self, outdir):
+        # wget https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64 -O /workspaces/ha_core/config/custom_components/ha_vscode/bin/vscode_cli.tar.gz
+
         result = None
-        getVSCodeCLIwget = (
-            "wget  'https://code.visualstudio.com/sha/download?build=stable&os=cli-debian-x64' -O "
-            + outdir
-        )
+        getVSCodeCLIwget = [
+            "wget",
+            "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64",
+            "-O",
+            outdir,
+        ]
 
         hasWget = subprocess.run(
-            ["which wget"],
-            shell=True,
+            ["which", "wget"],
             capture_output=True,
             text=True,
         )
-        if hasWget.stdout:
+        if hasWget.returncode == 0:
+            self.log.debug("wget found on the system")
             result = subprocess.run(
-                [getVSCodeCLIwget],
-                shell=True,
+                getVSCodeCLIwget,
                 capture_output=True,
                 text=True,
                 check=True,
             )
         else:
+            self.log.debug("wget not found on the system")
             return None
 
-        return result.stdout
+        return result.returncode == 0
 
     def unzip(self, outfile):
         # force overwrite of existing files - this will ensure vscode cli is updated. and we don't block on user prompt
         result = subprocess.run(
-            ["gzip -fd " + outfile],
-            shell=True,
+            ["gzip", "-fd", outfile],
             capture_output=True,
             text=True,
             check=True,
@@ -117,22 +123,23 @@ class VSCodeDeviceAPI:
             self.log.debug("Unzipped " + outfile)
         else:
             self.log.debug("Error occurred while unzipping " + outfile)
+            raise HAVSCodeZipException()
 
     def untar(self, outfile):
         result = subprocess.run(
-            ["tar -xvf " + outfile[:-3] + " -C " + self.storage_dir],
-            shell=True,
+            ["tar", "-xvf", outfile[:-3], "-C", self.storage_dir],
             capture_output=True,
             text=True,
             check=True,
         )
 
-        if result:
+        if result.returncode == 0:
             self.log.debug(result.stdout)
             self.log.debug("Untarred " + outfile[:-3])
         else:
             self.log.debug(result.stdout)
             self.log("Error occurred while untarring " + outfile[:-3])
+            raise HAVSCodeTarException()
 
     def checkExe(self, exePath):
         # check that the code executable exists
@@ -211,7 +218,7 @@ class VSCodeDeviceAPI:
         self.proc = None
         self.log.info("Tunnel Service ended.")
 
-    def getOAuthCode(self, timeout=3):
+    def getOAuthCode(self, timeout=3.0):
         out = None
         start = time.time()
         while True:
@@ -223,7 +230,7 @@ class VSCodeDeviceAPI:
                 self.log.debug("Released Lock - getOAuthCode")
                 self.log.debug("getOAuthCode returning: " + out)
                 break
-            if time.time() - start > timeout:
+            if (time.time() - start) > timeout:
                 self.lock.release()
                 self.log.debug("Released Lock - getOAuthCode")
                 self.log.debug("getOAuthCode returning: None")
@@ -234,6 +241,7 @@ class VSCodeDeviceAPI:
             time.sleep(0.1)
         return out
 
+    # will return none if we can't find the dev url
     def getDevURL(self, timeout=30):
         out = None
         start = time.time()
@@ -246,7 +254,7 @@ class VSCodeDeviceAPI:
                 self.log.debug("Released Lock - getDevURL")
                 self.log.debug("getDevURL returning: " + out)
                 break
-            if time.time() - start > timeout:
+            if (time.time() - start) > timeout:
                 self.lock.release()
                 self.log.debug("Released Lock - getDevURL")
                 self.log.debug("getDevURL returning: None")
@@ -294,7 +302,13 @@ class VSCodeDeviceAPI:
             return url
         return None
 
-    def register(self):
+    def activate(self, timeout=20.0):
+        result = self.getDevURL(timeout=timeout)
+        if result is None:
+            self.stopTunnel()
+        return result
+
+    def register(self, timeout=3.0):
         outfile = "vscode_cli.tar.gz"
         outdir = os.path.join(self.storage_dir, outfile)
 
@@ -307,15 +321,16 @@ class VSCodeDeviceAPI:
             self.log.info(
                 "Could not download vscode cli. Curl and wget are both not available on your system."
             )
-            return None
+            raise HAVSCodeDownloadException()
 
         self.unzip(outdir)
         self.untar(outdir)
         exePath = os.path.join(self.storage_dir, "code")
         self.checkExe(exePath)
         self.startTunnel(exePath)
-
-        return None
+        code = self.getOAuthCode(timeout=timeout)
+        self.log.debug("Registered with code: " + code)
+        return code
 
 
 def main():

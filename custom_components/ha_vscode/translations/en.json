@@ -1,36 +1,42 @@
 {
-    "config": {
-      "abort": {
-          "single_instance_allowed": "Only a single configuration of HACS is allowed.",
-          "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
-          "github": "Could not authenticate with GitHub, try again later.",
-          "done_debug": "End of developed code."
-      },
-      "step": {
-        "user": {
-          "title": "Home Assistant VSCode Tunnel",
-          "description": "If you need help with the configuration have a look here: https://github.com/adechant/ha_vscode . Before you can setup a VSCode Tunnel you need to acknowledge the following",
-          "data": {
-            "acc_logs": "I know how to access Home Assistant logs",
-            "acc_git": "I have an active github account - this will be required to authenticate the tunnel."
-          }
-        },
-        "device": {
-            "title": "Waiting for device activation"
+  "config": {
+    "abort": {
+        "single_instance_allowed": "Only a single configuration of HACS is allowed.",
+        "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
+        "authentication": "Could not authenticate with GitHub, try again later.",
+        "download": "Neither curl nor wget are available on your system. Please install one or the other and try again.",
+        "zip": "Unzipping and untarring the downloaded file failed. Please check the system logs.",
+        "unknown": "An unknown error occurred. Please check the system logs."
+    },
+    "error": {
+        "single_instance_allowed": "Only a single configuration of HACS is allowed.",
+        "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
+        "authentication": "Could not authenticate with GitHub, try again later.",
+        "download": "Neither curl nor wget are available on your system. Please install one or the other and try again.",
+        "zip": "Unzipping and untarring the downloaded file failed. Please check the system logs.",
+        "unknown": "An unknown error occurred. Please check the system logs."
+    },
+    "step": {
+      "user": {
+        "title": "Home Assistant VSCode Tunnel",
+        "description": "If you need help with the configuration have a look here: https://github.com/adechant/ha_vscode.",
+        "data": {
+          "acc_git": "Do you have an active github account? This will be required to authenticate the tunnel."
         }
-      },
-      "error": {
-        "auth": "Username/Password is wrong."
       }
     },
-    "options": {
-      "step": {
-        "user": {
-          "data": {
-            "service": "Service enabled"
-          }
+    "progress": {
+        "wait_for_oauth": "Generating OAuth token. Please wait while the tunnel is started.",
+        "wait_for_activation": "1. Open {url} \n2. Paste the following key to authorize your VSCode tunnel: \n```\n{code}\n```\n"
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "data": {
+          "service": "Service enabled"
         }
       }
     }
   }
-  
+}
