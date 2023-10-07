@@ -250,21 +250,21 @@ class VSCodeDeviceAPI:
         start = time.time()
         while True:
             self.lock.acquire()
-            self.log.debug("Acquired Lock - getOAuthToken")
+            #self.log.debug("Acquired Lock - getOAuthToken")
             if self.oauthToken:
                 out = self.oauthToken
                 self.lock.release()
-                self.log.debug("Released Lock - getOAuthToken")
-                self.log.debug("getOAuthToken returning: " + out)
+                #self.log.debug("Released Lock - getOAuthToken")
+                #self.log.debug("getOAuthToken returning: " + out)
                 break
             if (time.time() - start) > timeout:
                 self.lock.release()
-                self.log.debug("Released Lock - getOAuthToken")
-                self.log.debug("getOAuthToken returning: None")
+                #self.log.debug("Released Lock - getOAuthToken")
+                #self.log.debug("getOAuthToken returning: None")
                 break
             self.lock.release()
-            self.log.debug("Released Lock - getOAuthToken")
-            self.log.debug("Sleeping for 0.1s")
+            #self.log.debug("Released Lock - getOAuthToken")
+            #self.log.debug("Sleeping for 0.1s")
             time.sleep(0.1)
         return out
 
@@ -274,21 +274,21 @@ class VSCodeDeviceAPI:
         start = time.time()
         while True:
             self.lock.acquire()
-            self.log.debug("Acquired Lock - getDevURL")
+            #self.log.debug("Acquired Lock - getDevURL")
             if self.devURL:
                 out = self.devURL
                 self.lock.release()
-                self.log.debug("Released Lock - getDevURL")
-                self.log.debug("getDevURL returning: " + out)
+                #self.log.debug("Released Lock - getDevURL")
+                #self.log.debug("getDevURL returning: " + out)
                 break
             if (time.time() - start) > timeout:
                 self.lock.release()
-                self.log.debug("Released Lock - getDevURL")
-                self.log.debug("getDevURL returning: None")
+                #self.log.debug("Released Lock - getDevURL")
+                #self.log.debug("getDevURL returning: None")
                 break
             self.lock.release()
-            self.log.debug("Released Lock - getDevURL")
-            self.log.debug("Sleeping for 0.1s")
+            #self.log.debug("Released Lock - getDevURL")
+            #self.log.debug("Sleeping for 0.1s")
             time.sleep(0.1)
         return out
 
@@ -320,10 +320,11 @@ class VSCodeDeviceAPI:
             # if we have a dev url, we don't need an oauth token
             # probably should make this threadsafe
             self.lock.acquire()
-            self.log.debug("Acquired Lock - checkForDevURL")
+            #self.log.debug("Acquired Lock - checkForDevURL")
             self.devURL = url
+            self.log.debug("Found dev url: " + url)
             self.lock.release()
-            self.log.debug("Released Lock - checkForDevURL")
+            #self.log.debug("Released Lock - checkForDevURL")
             return url
         return None
 
