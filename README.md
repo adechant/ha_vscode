@@ -43,13 +43,13 @@ Using your HA configuration directory (folder) as a starting point you should no
 
 ```text
 custom_components/ha_vscode/translations/en.json
-custom_components/cc_ha_cci/__init__.py
-custom_components/cc_ha_cci/config_flow.py
-custom_components/cc_ha_cci/const.py
-custom_components/cc_ha_cci/exceptions.py
-custom_components/cc_ha_cci/manifest.json
-custom_components/cc_ha_cci/switch.py
-custom_components/cc_ha_cci/vscode_device.py
+custom_components/ha_vscode/__init__.py
+custom_components/ha_vscode/config_flow.py
+custom_components/ha_vscode/const.py
+custom_components/ha_vscode/exceptions.py
+custom_components/ha_vscode/manifest.json
+custom_components/ha_vscode/switch.py
+custom_components/ha_vscode/vscode_device.py
 ```
 
 ## Configuration is done in the UI

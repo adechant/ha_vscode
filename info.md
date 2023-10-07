@@ -11,9 +11,9 @@
 
 **This component will set up the following platforms.**
 
-| Platform        | Description                                  |
-| --------------- | -------------------------------------------- |
-| `service`       | VSCode tunnel in your HA Docker container.   |
+| Platform        | Description                                                                |
+| --------------- | -------------------------------------------------------------------------- |
+| `switch`        | VSCode tunnel in your HA Docker container. Turn it on/off with the switch  |
 
 
 {% if not installed %}

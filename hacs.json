@@ -1,6 +1,6 @@
 {
   "name": "Home Assistant VSCode Tunnel",
   "hacs": "1.6.0",
-  "domains": ["service"],
+  "domains": ["switch"],
   "homeassistant": "0.118.0"
 }
