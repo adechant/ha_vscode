@@ -159,8 +159,11 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
         self.config_entry = config_entry
         self.device = None
         self.path = config_entry.options.get("path")
-        self.dev_url = config_entry.options.get("dev_url")
+        self.devURL = config_entry.options.get("dev_url")
+        self.oauthToken = config_entry.options.get("token")
         self.timeout = config_entry.options.get("timeout")
+        if self.timeout is None:
+            self.timeout = 3.0
         self.log = LOGGER
         self._reauth = False
 
@@ -176,22 +179,24 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
             self.device.startTunnel()
             token = await self.device.getOAuthToken()
             if token is not None:
-                self.log.debug("Token received during config setup was: " + token)
+                self.oauthToken = token
+                self.log.debug("Token received during option setup was: " + token)
+                self.log.debug("Reauthorization is needed.")
                 self._reauth = True
-            url = await self.device.getDevURL()
-            if self.dev_url is None:
-                self.dev_url = url
-            self.device.stopTunnel()
+                # we'll have to stop the tunnel later...
+            else:
+                url = await self.device.getDevURL()
+                if self.devURL is None:
+                    self.devURL = url
+                self.device.stopTunnel()
 
-        """Manage the options."""
         return await self.async_step_user()
 
     async def async_step_user(self, user_input=None):
         """Handle a flow initialized by the user."""
         havsc = self.hass.data.get(DOMAIN)
         if user_input is not None:
-            _reauth = bool(user_input.get("needs_reauth", False))
-            _timeout = float(user_input.get("timeout")), 5.0
+            _timeout = float(user_input.get("timeout"))
             if self.timeout != _timeout:
                 return self.async_create_entry(
                     title="HA VSCode Tunnel",
@@ -199,6 +204,7 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
                         "token": self.oauthToken,
                         "dev_url": self.devURL,
                         "path": self.path,
+                        "timeout": _timeout,
                     },
                     description="Created configuration for HA VSCode Tunnel.\nPlease access VSCode instance at {url}",
                     description_placeholders={
@@ -211,15 +217,54 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
         if self.config_entry is None:
             return self.async_abort(reason="not_setup")
 
+        placeHolders = None
         schema = {
-            vol.Optional("needs_reauth", default=self._reauth): bool,
             vol.Optional("timeout", default=self.timeout): float,
         }
+        if self._reauth:
+            return self.async_show_form(
+                step_id="reauth",
+                data_schema=None,
+                description_placeholders={
+                    "token": self.oauthToken,
+                    "url": "https://github.com/login/device",
+                },
+            )
+        else:
+            return self.async_show_form(
+                step_id="user",
+                data_schema=vol.Schema(schema),
+                description_placeholders={
+                    "url": self.devURL,
+                },
+            )
 
-        return self.async_show_form(
-            step_id="user",
-            data_schema=vol.Schema(schema),
-            description_placeholders={
-                "url": self.dev_url,
-            },
-        )
+    async def async_step_reauth(self, user_input=None):
+        if user_input is not None:
+            url = await self.device.getDevURL()
+            self.device.stopTunnel()
+            if url is None:
+                return self.async_abort(reason="reauth_error")
+            self.devURL = url
+            return self.async_create_entry(
+                title="HA VSCode Tunnel",
+                data={
+                    "token": self.oauthToken,
+                    "dev_url": self.devURL,
+                    "path": self.path,
+                    "timeout": self.timeout,
+                },
+                description="Created configuration for HA VSCode Tunnel.\nPlease access VSCode instance at {url}",
+                description_placeholders={
+                    "url": self.devURL,
+                },
+            )
+
+        return self.async_abort(reason="reauth_error")
+
+    @callback
+    def async_remove(self):
+        """Clean up resources or tasks associated with the flow."""
+        if self.device is not None:
+            self.device.stopTunnel()
+            self.device = None

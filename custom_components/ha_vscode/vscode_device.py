@@ -245,73 +245,56 @@ class VSCodeDeviceAPI:
         self.proc = None
         self.log.info("Tunnel Service ended.")
 
+    # tried asyncio.timeout with a context manager, but some weird shirt was happening.
+    # no timeouterror was being thrown and the tiemout in the context manager was being
+    # reset to ~5800 seconds.. ??maybe affected by the main event loop somewhere
     async def getOAuthToken(self, timeout=3.0):
         out = None
-        try:
-            async with asyncio.timeout(timeout) as cm:
-                while True:
-                    if cm.expired():
-                        self.log.debug(
-                            "getOAuthToken timeout context manager expired without throwing TimeoutError"
-                        )
-                        break
-                    else:
-                        self.log.debug(
-                            "getOAuthToken has "
-                            + str(cm.when())
-                            + " seconds left to run"
-                        )
-                    self.lock.acquire()
-                    # self.log.debug("Acquired Lock - getOAuthToken")
-                    if self.oauthToken:
-                        out = self.oauthToken
-                        self.lock.release()
-                        # self.log.debug("Released Lock - getOAuthToken")
-                        # self.log.debug("getOAuthToken returning: " + out)
-                        break
-                    self.lock.release()
-                    # self.log.debug("Released Lock - getOAuthToken")
-                    self.log.debug("Sleeping for 0.1s in getOAuthToken")
-                    asyncio.sleep(0.1)
-        except asyncio.TimeoutError:
-            if self.lock.locked():
+        start = time.time()
+        while True:
+            self.lock.acquire()
+            # self.log.debug("Acquired Lock - getOAuthToken")
+            if self.oauthToken:
+                out = self.oauthToken
                 self.lock.release()
-            self.log.debug("get/oAuthToken timed out. Lock released. Returning None")
-        except Exception as e:
-            self.log.debug("getOAuthToken has thrown an unknown excpetion")
+                # self.log.debug("Released Lock - getOAuthToken")
+                # self.log.debug("getOAuthToken returning: " + out)
+                break
+
+            if (time.time() - start) > timeout:
+                # self.log.debug("Released Lock - getOAuthToken")
+                # self.log.debug("getOAuthToken returning: None")
+                self.lock.release()
+                break
+            self.lock.release()
+            # self.log.debug("Released Lock - getOAuthToken")
+            # self.log.debug("Sleeping for 0.1s in getOAuthToken")
+            asyncio.sleep(0.1)
         return out
 
     # will return none if we can't find the dev url
     async def getDevURL(self, timeout=3.0):
         out = None
-        try:
-            async with asyncio.timeout(timeout=timeout) as cm:
-                while True:
-                    if cm.expired():
-                        self.log.debug(
-                            "getDevURL timeout context manager expired without throwing TimeoutError"
-                        )
-                        break
-                    else:
-                        self.log.debug(
-                            "getDevURL has " + str(cm.when()) + " seconds left to run"
-                        )
-                    self.lock.acquire()
-                    # self.log.debug("Acquired Lock - getDevURL")
-                    if self.devURL:
-                        out = self.devURL
-                        self.lock.release()
-                        # self.log.debug("Released Lock - getDevURL")
-                        # self.log.debug("getDevURL returning: " + out)
-                        break
-                    self.lock.release()
-                    # self.log.debug("Released Lock - getDevURL")
-                    self.log.debug("Sleeping for 0.1s in getDevURL")
-                    asyncio.sleep(0.1)
-        except asyncio.TimeoutError:
-            if self.lock.locked():
+        start = time.time()
+        while True:
+            self.lock.acquire()
+            # self.log.debug("Acquired Lock - getDevURL")
+            if self.devURL:
+                out = self.devURL
                 self.lock.release()
-            self.log.debug("getDevUrl timed out. Lock released. Returning None")
+                # self.log.debug("Released Lock - getDevURL")
+                # self.log.debug("getDevURL returning: " + out)
+                break
+
+            if (time.time() - start) > timeout:
+                # self.log.debug("Released Lock - getOAuthToken")
+                # self.log.debug("getOAuthToken returning: None")
+                self.lock.release()
+                break
+            self.lock.release()
+            # self.log.debug("Released Lock - getDevURL")
+            # self.log.debug("Sleeping for 0.1s in getDevURL")
+            asyncio.sleep(0.1)
         return out
 
     def checkForOauthToken(self, line):
