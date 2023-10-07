@@ -1,7 +1,7 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
   "image": "ludeeus/container:integration-debian",
-  "name": "Cookiecutter Home Assistant Custom Component Instance integration development",
+  "name": "HA VSCode Tunnel integration development",
   "context": "..",
   "appPort": ["9123:8123"],
   "postCreateCommand": "container install",
