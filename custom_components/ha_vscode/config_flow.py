@@ -52,12 +52,12 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
         if self.device is None:
             self.device = VSCodeDeviceAPI(self.path)
-            response = self.device.register(
-                timeout=3
+            response = await self.device.register(
+                timeout=5
             )  # can specify a timeout here. default is 3 seconds
             if response is None:
                 # check to see if we are somehow already authenticated
-                response = self.device.getDevURL(timeout=1.0)
+                response = self.device.getDevURL(timeout=5.0)
                 if response is None:
                     self._error = HAVSCodeAuthenticationException()
                 else:
@@ -95,7 +95,7 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_activate(self, _user_input):
         if not self.devURL and not self._error:
-            result = self.device.activate(timeout=3)
+            result = await self.device.activate(timeout=3)
             if not result:
                 self._error = HAVSCodeAuthenticationException()
             else:
@@ -109,7 +109,12 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         # create entry and finish.
         return self.async_create_entry(
             title="HA VSCode Tunnel",
-            data={"token": self.oauthToken, "dev_url": self.devURL, "path": self.path},
+            data={
+                "token": self.oauthToken,
+                "dev_url": self.devURL,
+                "path": self.path,
+                "timeout": 5.0,
+            },
             description="Created configuration for HA VSCode Tunnel.\nPlease access VSCode instance at {url}",
             description_placeholders={
                 "url": self.devURL,
@@ -153,8 +158,9 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
         """Initialize HACS options flow."""
         self.config_entry = config_entry
         self.device = None
-        self.path = None
-        self.exe = None
+        self.path = config_entry.options.get("path")
+        self.dev_url = config_entry.options.get("dev_url")
+        self.timeout = config_entry.options.get("timeout")
         self.log = LOGGER
         self._reauth = False
 
@@ -168,10 +174,13 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
             # start a tunnel and see if an oauth token is generated. if it is, then we need to reauth.
             self.device = VSCodeDeviceAPI(self.path)
             self.device.startTunnel()
-            token = self.device.getOAuthToken()
+            token = await self.device.getOAuthToken()
             if token is not None:
                 self.log.debug("Token received during config setup was: " + token)
                 self._reauth = True
+            url = await self.device.getDevURL()
+            if self.dev_url is None:
+                self.dev_url = url
             self.device.stopTunnel()
 
         """Manage the options."""
@@ -182,6 +191,21 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
         havsc = self.hass.data.get(DOMAIN)
         if user_input is not None:
             _reauth = bool(user_input.get("needs_reauth", False))
+            _timeout = float(user_input.get("timeout")), 5.0
+            if self.timeout != _timeout:
+                return self.async_create_entry(
+                    title="HA VSCode Tunnel",
+                    data={
+                        "token": self.oauthToken,
+                        "dev_url": self.devURL,
+                        "path": self.path,
+                    },
+                    description="Created configuration for HA VSCode Tunnel.\nPlease access VSCode instance at {url}",
+                    description_placeholders={
+                        "url": self.devURL,
+                    },
+                )
+
             return self.async_abort(reason="no_reauth_needed")
 
         if self.config_entry is None:
@@ -189,12 +213,13 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
 
         schema = {
             vol.Optional("needs_reauth", default=self._reauth): bool,
+            vol.Optional("timeout", default=self.timeout): float,
         }
 
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema(schema),
             description_placeholders={
-                "url": self.config_entry.options.get("dev_url"),
+                "url": self.dev_url,
             },
         )

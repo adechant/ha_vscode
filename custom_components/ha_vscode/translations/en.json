@@ -37,7 +37,8 @@
         "title": "Home Assistant VSCode Tunnel",
         "description": "Service enabled. Please access VSCode instance at {url}",
         "data": {
-          "needs_reauth": "Click here if the service needs re-authentication."
+          "needs_reauth": "Click here if the service needs re-authentication.",
+          "timeout": "If starting the tunnel is not working. It made need more time. Increase the timeout."
         }
       }
     }
