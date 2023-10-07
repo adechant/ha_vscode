@@ -248,6 +248,7 @@ class VSCodeDeviceAPI:
     # tried asyncio.timeout with a context manager, but some weird shirt was happening.
     # no timeouterror was being thrown and the tiemout in the context manager was being
     # reset to ~5800 seconds.. ??maybe affected by the main event loop somewhere
+    # maybe because we weren't waiting on sleep --> try timeout again!
     async def getOAuthToken(self, timeout=3.0):
         out = None
         start = time.time()
@@ -269,11 +270,11 @@ class VSCodeDeviceAPI:
             self.lock.release()
             # self.log.debug("Released Lock - getOAuthToken")
             # self.log.debug("Sleeping for 0.1s in getOAuthToken")
-            asyncio.sleep(0.1)
+            await asyncio.sleep(0.1)
         return out
 
     # will return none if we can't find the dev url
-    async def getDevURL(self, timeout=3.0):
+    async def getDevURL(self, timeout=5.0):
         out = None
         start = time.time()
         while True:
@@ -294,7 +295,7 @@ class VSCodeDeviceAPI:
             self.lock.release()
             # self.log.debug("Released Lock - getDevURL")
             # self.log.debug("Sleeping for 0.1s in getDevURL")
-            asyncio.sleep(0.1)
+            await asyncio.sleep(0.1)
         return out
 
     def checkForOauthToken(self, line):

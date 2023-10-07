@@ -20,6 +20,8 @@
 1. Install the custom component from HACS.
 2. Restart Home Assistant.
 3. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Home Assistant VSCode Tunnel".
+4. Follow the installation instructions. Authenticating with github is required.
+5. Restart Home Assistant
 
 **This component will set up the following platforms.**
 

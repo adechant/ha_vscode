@@ -32,6 +32,7 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         self.log = LOGGER
         self.path = None
         self.activate = False
+        self.timeout = 5.0
 
     async def async_step_user(self, user_input):
         if self._async_current_entries():
@@ -57,7 +58,7 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             )  # can specify a timeout here. default is 3 seconds
             if response is None:
                 # check to see if we are somehow already authenticated
-                response = self.device.getDevURL(timeout=5.0)
+                response = await self.device.getDevURL(timeout=self.timeout)
                 if response is None:
                     self._error = HAVSCodeAuthenticationException()
                 else:
@@ -113,7 +114,7 @@ class HAVSCodeFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 "token": self.oauthToken,
                 "dev_url": self.devURL,
                 "path": self.path,
-                "timeout": 5.0,
+                "timeout": self.timeout,
             },
             description="Created configuration for HA VSCode Tunnel.\nPlease access VSCode instance at {url}",
             description_placeholders={
@@ -163,7 +164,7 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
         self.oauthToken = config_entry.options.get("token")
         self.timeout = config_entry.options.get("timeout")
         if self.timeout is None:
-            self.timeout = 3.0
+            self.timeout = 5.0
         self.log = LOGGER
         self._reauth = False
 
@@ -185,7 +186,7 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
                 self._reauth = True
                 # we'll have to stop the tunnel later...
             else:
-                url = await self.device.getDevURL()
+                url = await self.device.getDevURL(self.timeout)
                 if self.devURL is None:
                     self.devURL = url
                 self.device.stopTunnel()
@@ -241,7 +242,7 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
 
     async def async_step_reauth(self, user_input=None):
         if user_input is not None:
-            url = await self.device.getDevURL()
+            url = await self.device.getDevURL(self.timeout)
             self.device.stopTunnel()
             if url is None:
                 return self.async_abort(reason="reauth_error")
