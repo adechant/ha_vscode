@@ -23,9 +23,9 @@
 
 **This component will set up the following platforms.**
 
-| Platform        | Description                                  |
-| --------------- | -------------------------------------------- |
-| `service`       | VSCode tunnel in your HA Docker container.   |
+| Platform        | Description                                                                |
+| --------------- | -------------------------------------------------------------------------- |
+| `switch`        | VSCode tunnel in your HA Docker container. Turn it on/off with the switch  |
 
 [![example]][exampleimg]
 
@@ -43,15 +43,13 @@ Using your HA configuration directory (folder) as a starting point you should no
 
 ```text
 custom_components/ha_vscode/translations/en.json
-custom_components/ha_vscode/translations/fr.json
-custom_components/ha_vscode/translations/nb.json
-custom_components/cc_ha_cci/api.py
-custom_components/cc_ha_cci/binary_sensor.py
+custom_components/cc_ha_cci/__init__.py
 custom_components/cc_ha_cci/config_flow.py
 custom_components/cc_ha_cci/const.py
+custom_components/cc_ha_cci/exceptions.py
 custom_components/cc_ha_cci/manifest.json
-custom_components/cc_ha_cci/sensor.py
 custom_components/cc_ha_cci/switch.py
+custom_components/cc_ha_cci/vscode_device.py
 ```
 
 ## Configuration is done in the UI

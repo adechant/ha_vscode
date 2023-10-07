@@ -28,6 +28,8 @@
 
 ## Configuration is done in the UI
 
+If you are having trouble with authentication, increase the timeout in the options.  
+
 <!---->
 
 ## Credits
