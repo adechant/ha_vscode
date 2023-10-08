@@ -1,3 +1,4 @@
+import re
 from .vscode_device import VSCodeDeviceAPI
 from homeassistant.const import UnitOfInformation
 from homeassistant.components.switch import (
@@ -21,7 +22,14 @@ class VSCodeEntity(SwitchEntity):
 
     def __init__(self, bin_dir, dev_url):
         self.device = VSCodeDeviceAPI(bin_dir)
-        self._attr_name = "VSCode Tunnel: " + dev_url
+        if dev_url.startswith("https://vscode.dev/tunnel/"):
+            #try and output just the tunnel name
+            slen = len("https://vscode.dev/tunnel/")
+            dev_url = dev_url[-slen:]
+            match = re.search("^(.*)/", dev_url)
+            if match:
+                dev_url = match.group()[:-1]
+        self._attr_name = "VSCode.dev Tunnel: " + dev_url
 
     def turn_on(self, **kwargs) -> None:
         """Turn the entity on."""
