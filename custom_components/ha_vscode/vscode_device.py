@@ -5,9 +5,9 @@ import os
 import os.path
 import re
 import subprocess
-from threading import Thread, Lock
 import time
 
+from threading import Thread, Lock
 from .const import PACKAGE_NAME
 from .exceptions import (
     HAVSCodeDownloadException,
@@ -382,4 +382,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

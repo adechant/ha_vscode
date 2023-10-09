@@ -1,10 +1,12 @@
+
+import re
+
 from homeassistant.const import UnitOfInformation
 from homeassistant.components.switch import (
     SwitchEntity,
     SwitchDeviceClass,
 )
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
-import re
 from .vscode_device import VSCodeDeviceAPI
 
 
