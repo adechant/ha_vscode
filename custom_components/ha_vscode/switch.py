@@ -1,4 +1,3 @@
-
 import re
 
 from homeassistant.components.switch import SwitchDeviceClass

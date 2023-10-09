@@ -98,4 +98,3 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [releases-shield]: https://img.shields.io/github/release/adechant/ha_sscode.svg?style=for-the-badge
 [releases]: https://github.com/adechant/ha_vscode/releases
 [user_profile]: https://github.com/oncleben31
-

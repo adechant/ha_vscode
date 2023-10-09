@@ -4,7 +4,6 @@ import os
 import re
 import subprocess
 import time
-
 from threading import Lock
 from threading import Thread
 
