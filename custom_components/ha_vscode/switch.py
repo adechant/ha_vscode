@@ -6,6 +6,7 @@ from homeassistant.components.switch import SwitchEntity
 from homeassistant.const import UnitOfInformation
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.typing import DiscoveryInfoType
+
 from .vscode_device import VSCodeDeviceAPI
 
 

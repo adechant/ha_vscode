@@ -18,8 +18,6 @@
 | -------- | ------------------------------------------------------------------------- |
 | `switch` | VSCode tunnel in your HA Docker container. Turn it on/off with the switch |
 
-
-
 {% if not installed %}
 
 ## HACS Installation

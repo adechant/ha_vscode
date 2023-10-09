@@ -1,5 +1,6 @@
 """Provide the initial setup."""
 import logging
+
 from .const import *
 
 _LOGGER = logging.getLogger(__name__)

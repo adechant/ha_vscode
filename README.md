@@ -15,9 +15,7 @@
 
 <img src="https://raw.githubusercontent.com/adechant/ha_vscode/main/custom_components/ha_vscode/images/icon.png" alt="Home Assistant VSCode Tunel logo" title="HA VSCode Tunnel" align="right" height="60" />
 
-
 ## HACS Installation
-
 
 1. Install the custom component from HACS.
 2. Restart Home Assistant.
@@ -100,3 +98,4 @@ Code template was mainly taken from [@Ludeeus](https://github.com/ludeeus)'s [in
 [releases-shield]: https://img.shields.io/github/release/adechant/ha_sscode.svg?style=for-the-badge
 [releases]: https://github.com/adechant/ha_vscode/releases
 [user_profile]: https://github.com/oncleben31
+
