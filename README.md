@@ -13,7 +13,7 @@
 
 [![Community Forum][forum-shield]][forum]
 
-<img src="https://raw.githubusercontent.com/adechant/ha_vscode/master/images/icon.png?raw=true" alt="Home Assistant VSCode Tunel logo" title="HA VSCode Tunnel" align="right" height="60" />
+<img src="https://raw.githubusercontent.com/adechant/ha_vscode/main/custom_components/ha_vscode/images/icon.png" alt="Home Assistant VSCode Tunel logo" title="HA VSCode Tunnel" align="right" height="60" />
 
 
 ## HACS Installation
@@ -35,8 +35,6 @@ https://vscode.dev can't be opened in an iframe, so this will not work as a side
 | Platform        | Description                                                                |
 | --------------- | -------------------------------------------------------------------------- |
 | `switch`        | VSCode tunnel in your HA Docker container. Turn it on/off with the switch  |
-
-[![example]][exampleimg]
 
 ## Manual Installation
 

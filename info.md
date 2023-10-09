@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/adechant/ha_vscode/master/images/icon.png?raw=true" alt="Home Assistant VSCode Tunel logo" title="HA VSCode Tunnel" align="right" height="60" />
+<img src="https://raw.githubusercontent.com/adechant/ha_vscode/main/custom_components/ha_vscode/images/icon.png" alt="Home Assistant VSCode Tunel logo" title="HA VSCode Tunnel" align="right" height="60" />
 
 # Home Assistant VSCode Tunnel
 
