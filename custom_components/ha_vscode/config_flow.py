@@ -1,8 +1,8 @@
 """Adds config flow for VSCode HA Tunnel."""
 import logging
 import os.path
-import voluptuous as vol
 
+import voluptuous as vol
 from awesomeversion import AwesomeVersion
 from homeassistant import config_entries
 from homeassistant.const import __version__ as HAVERSION

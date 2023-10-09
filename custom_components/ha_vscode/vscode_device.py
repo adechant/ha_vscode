@@ -6,11 +6,12 @@ import re
 import subprocess
 import time
 
-from threading import Thread, Lock
+from threading import Lock
+from threading import Thread
 from .const import PACKAGE_NAME
 from .exceptions import HAVSCodeDownloadException
-from .exceptions import HAVSCodeZipException
 from .exceptions import HAVSCodeTarException
+from .exceptions import HAVSCodeZipException
 
 if not "PACKAGE_NAME" in globals():
     PACKAGE_NAME = "ha_vscode"
