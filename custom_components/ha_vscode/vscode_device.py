@@ -2,18 +2,15 @@
 import asyncio
 import logging
 import os
-import os.path
 import re
 import subprocess
 import time
 
 from threading import Thread, Lock
 from .const import PACKAGE_NAME
-from .exceptions import (
-    HAVSCodeDownloadException,
-    HAVSCodeZipException,
-    HAVSCodeTarException,
-)
+from .exceptions import HAVSCodeDownloadException
+from .exceptions import HAVSCodeZipException
+from .exceptions import HAVSCodeTarException
 
 if not "PACKAGE_NAME" in globals():
     PACKAGE_NAME = "ha_vscode"

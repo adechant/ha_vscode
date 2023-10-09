@@ -32,9 +32,9 @@ https://vscode.dev can't be opened in an iframe, so this will not work as a side
 
 **This component will set up the following platforms.**
 
-| Platform | Description                                                                |
-| -------- | -------------------------------------------------------------------------- |
-| `switch` | VSCode tunnel in your HA Docker container. Turn it on/off with the switch  |
+| Platform | Description                                                               |
+| -------- | ------------------------------------------------------------------------- |
+| `switch` | VSCode tunnel in your HA Docker container. Turn it on/off with the switch |
 
 ## Manual Installation
 
