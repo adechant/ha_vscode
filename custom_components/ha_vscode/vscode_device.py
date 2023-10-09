@@ -1,11 +1,12 @@
-import subprocess
-import time
+
 import asyncio
-import re
-import os
 import logging
+import os
 import os.path
+import re
+import subprocess
 from threading import Thread, Lock
+import time
 
 from .const import PACKAGE_NAME
 from .exceptions import (
@@ -381,3 +382,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

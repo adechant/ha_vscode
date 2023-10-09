@@ -32,9 +32,9 @@ https://vscode.dev can't be opened in an iframe, so this will not work as a side
 
 **This component will set up the following platforms.**
 
-| Platform        | Description                                                                |
-| --------------- | -------------------------------------------------------------------------- |
-| `switch`        | VSCode tunnel in your HA Docker container. Turn it on/off with the switch  |
+| Platform  | Description                                                                |
+| --------- | -------------------------------------------------------------------------- |
+| `switch`  | VSCode tunnel in your HA Docker container. Turn it on/off with the switch  |
 
 ## Manual Installation
 
@@ -45,9 +45,9 @@ https://vscode.dev can't be opened in an iframe, so this will not work as a side
 5. Place the files you downloaded in the new directory (folder) you created.
 6. Restart Home Assistant
 7. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Home Assistant"
-6. Turn on the VSCode Tunnel Switch entity to start the tunnel.
-7. Go to https://vscode.dev/your_tunnel_name to access your home assistant files (configuartion.yaml, etc)
-8. Turn off the VScode Tunnel Switch if you want to stop the tunnel and the associated external connection.
+8. Turn on the VSCode Tunnel Switch entity to start the tunnel.
+9. Go to https://vscode.dev/your_tunnel_name to access your home assistant files (configuartion.yaml, etc)
+10. Turn off the VScode Tunnel Switch if you want to stop the tunnel and the associated external connection.
 
 Using your HA configuration directory (folder) as a starting point you should now also have this:
 

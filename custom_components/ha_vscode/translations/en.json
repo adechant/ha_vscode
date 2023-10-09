@@ -1,20 +1,20 @@
 {
   "config": {
     "abort": {
-        "single_instance_allowed": "Only a single configuration of HACS is allowed.",
-        "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
-        "authentication": "Could not authenticate with GitHub, try again later.",
-        "download": "Neither curl nor wget are available on your system. Please install one or the other and try again.",
-        "zip": "Unzipping and untarring the downloaded file failed. Please check the system logs.",
-        "unknown": "An unknown error occurred. Please check the system logs."
+      "single_instance_allowed": "Only a single configuration of HACS is allowed.",
+      "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
+      "authentication": "Could not authenticate with GitHub, try again later.",
+      "download": "Neither curl nor wget are available on your system. Please install one or the other and try again.",
+      "zip": "Unzipping and untarring the downloaded file failed. Please check the system logs.",
+      "unknown": "An unknown error occurred. Please check the system logs."
     },
     "error": {
-        "single_instance_allowed": "Only a single configuration of HACS is allowed.",
-        "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
-        "authentication": "Could not authenticate with GitHub, try again later.",
-        "download": "Neither curl nor wget are available on your system. Please install one or the other and try again.",
-        "zip": "Unzipping and untarring the downloaded file failed. Please check the system logs.",
-        "unknown": "An unknown error occurred. Please check the system logs."
+      "single_instance_allowed": "Only a single configuration of HACS is allowed.",
+      "min_ha_version": "You need at least version {version} of Home Assistant to setup HACS.",
+      "authentication": "Could not authenticate with GitHub, try again later.",
+      "download": "Neither curl nor wget are available on your system. Please install one or the other and try again.",
+      "zip": "Unzipping and untarring the downloaded file failed. Please check the system logs.",
+      "unknown": "An unknown error occurred. Please check the system logs."
     },
     "step": {
       "user": {
@@ -23,15 +23,15 @@
       }
     },
     "progress": {
-        "wait_for_oauth": "Generating OAuth token. Please wait while the tunnel is started.",
-        "wait_for_activation": "1. Open {url} \n2. Paste the following token to authorize your VSCode tunnel: \n```\n{token}\n```\n"
+      "wait_for_oauth": "Generating OAuth token. Please wait while the tunnel is started.",
+      "wait_for_activation": "1. Open {url} \n2. Paste the following token to authorize your VSCode tunnel: \n```\n{token}\n```\n"
     }
   },
   "options": {
     "abort": {
-        "not_setup": "HA VSCode Tunnel is not setup.",
-        "no_reauth_needed": "HA VSCode Tunnel is up and running!",
-        "reauth_error": "Tunnel re-authorization failed. Please try again later!"
+      "not_setup": "HA VSCode Tunnel is not setup.",
+      "no_reauth_needed": "HA VSCode Tunnel is up and running!",
+      "reauth_error": "Tunnel re-authorization failed. Please try again later!"
     },
     "step": {
       "user": {

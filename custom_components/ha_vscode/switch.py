@@ -1,11 +1,11 @@
-import re
-from .vscode_device import VSCodeDeviceAPI
 from homeassistant.const import UnitOfInformation
 from homeassistant.components.switch import (
     SwitchEntity,
     SwitchDeviceClass,
 )
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
+import re
+from .vscode_device import VSCodeDeviceAPI
 
 
 async def async_setup_entry(hass, config, async_add_devices):
