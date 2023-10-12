@@ -26,7 +26,7 @@ class VSCodeEntity(SwitchEntity):
         if dev_url.startswith("https://vscode.dev/tunnel/"):
             # try and output just the tunnel name
             slen = len("https://vscode.dev/tunnel/")
-            dev_url = dev_url[-slen:]
+            dev_url = dev_url[slen:]
             match = re.search("^(.*)/", dev_url)
             if match:
                 dev_url = match.group()[:-1]
