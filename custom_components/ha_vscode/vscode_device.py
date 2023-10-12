@@ -154,7 +154,9 @@ class VSCodeDeviceAPI:
         try:
             while True:
                 line = self.proc.stdout.readline().strip()
-                self.log.debug("Parsing line: " + line)
+                if line is not None:
+                    if len(line) > 0 :
+                        self.log.debug("Parsing line: " + line)
                 if not self.checkForOauthToken(line):
                     self.checkForDevURL(line)
         except:

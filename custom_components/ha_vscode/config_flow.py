@@ -166,7 +166,7 @@ class HAVSCodeOptionsFlowHandler(config_entries.OptionsFlow):
         self.oauthToken = config_entry.options.get("token")
         self.timeout = config_entry.options.get("timeout")
         if self.timeout is None:
-            self.timeout = 5.0
+            self.timeout = 7.0
         self.log = LOGGER
         self._reauth = False
 
