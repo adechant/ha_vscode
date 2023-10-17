@@ -17,11 +17,13 @@ if not "PACKAGE_NAME" in globals():
 
 LOGGER: logging.Logger = logging.getLogger(PACKAGE_NAME)
 
+# don't know why but there is no alpine-armhf version, only linux
 architecture_map = {
-    "x86_64": "x64",
-    "armv7l": "armhf",
-    "aarch64": "arm64",
+    "x86_64": "alpine-x64",
+    "armv7l": "linux-armhf",
+    "aarch64": "alpine-arm64",
 }
+
 
 class VSCodeDeviceAPI:
     """Command line VSCode Tunnel OAuth device flow"""
@@ -60,7 +62,7 @@ class VSCodeDeviceAPI:
         getVSCodeCLIcurl = [
             "curl",
             "-Lk",
-            f"https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-{architecture_map[architecture]}",
+            f"https://code.visualstudio.com/sha/download?build=stable&os=cli-{architecture_map[architecture]}",
             "--output",
             outdir,
         ]
@@ -92,7 +94,7 @@ class VSCodeDeviceAPI:
         architecture = os.uname().machine
         getVSCodeCLIwget = [
             "wget",
-            f"https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-{architecture_map[architecture]}",
+            f"https://code.visualstudio.com/sha/download?build=stable&os=cli-{architecture_map[architecture]}",
             "-O",
             outdir,
         ]
@@ -162,7 +164,7 @@ class VSCodeDeviceAPI:
             while True:
                 line = self.proc.stdout.readline().strip()
                 if line is not None:
-                    if len(line) > 0 :
+                    if len(line) > 0:
                         self.log.debug("Parsing line: " + line)
                 if not self.checkForOauthToken(line):
                     self.checkForDevURL(line)
