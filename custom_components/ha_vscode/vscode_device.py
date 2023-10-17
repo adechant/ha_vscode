@@ -17,6 +17,11 @@ if not "PACKAGE_NAME" in globals():
 
 LOGGER: logging.Logger = logging.getLogger(PACKAGE_NAME)
 
+architecture_map = {
+    "x86_64": "x64",
+    "armv7l": "armhf",
+    "aarch64": "arm64",
+}
 
 class VSCodeDeviceAPI:
     """Command line VSCode Tunnel OAuth device flow"""
@@ -51,10 +56,11 @@ class VSCodeDeviceAPI:
     def downloadViaCurl(self, outdir):
         # curl -Lk https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64 --output /workspaces/ha_core/config/custom_components/ha_vscode/bin/vscode_cli.tar.gz
         result = None
+        architecture = os.uname().machine
         getVSCodeCLIcurl = [
             "curl",
             "-Lk",
-            "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64",
+            f"https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-{architecture_map[architecture]}",
             "--output",
             outdir,
         ]
@@ -83,9 +89,10 @@ class VSCodeDeviceAPI:
         # wget https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64 -O /workspaces/ha_core/config/custom_components/ha_vscode/bin/vscode_cli.tar.gz
 
         result = None
+        architecture = os.uname().machine
         getVSCodeCLIwget = [
             "wget",
-            "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64",
+            f"https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-{architecture_map[architecture]}",
             "-O",
             outdir,
         ]
